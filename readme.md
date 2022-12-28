@@ -14,3 +14,5 @@
 | Language / Tool | Notes Link                               |
 | --------------- | ---------------------------------------- |
 | NodeJs          | [Click here to access](NodeJs/readme.md) |
+| Git             | [Click here to access](Git/readme.md)    |
+| VSCODE          | [Click here to access](VSCODE/readme.md) |
