@@ -3,8 +3,13 @@
   - [Creating a local git project](#creating-a-local-git-project)
   - [Staging](#staging)
   - [Ignoring Files](#ignoring-files)
+  - [Branches and Merging](#branches-and-merging)
+  - [Merge Conflicts\*\*](#merge-conflicts)
+  - [Stashing](#stashing)
+  - [git clean](#git-clean)
   - [All Commands](#all-commands)
-- [Local system to github](#local-system-to-github)
+  - [NOTES](#notes)
+- [Github](#github)
   - [New repo to existing online repo (empty)](#new-repo-to-existing-online-repo-empty)
   - [Locally created repo to existing online repo (empty)](#locally-created-repo-to-existing-online-repo-empty)
 
@@ -67,21 +72,86 @@ This setting lets you write a kind of global .gitignore file. The steps to do th
 
 > If gitignore is not working correctly, execute this command : `git rm -r --cached .`
 
+## Branches and Merging
+
+- The point of branches is to create a separate location / chain (feature/fix branch) where a new feature is implemented OR an issue is fixed
+- After appropriate fixes / feature development, we merge the branch to main branch
+- After merging to main branch, we delete the feature/fix branch
+- This whole process is called Git Flow
+- In summary, Git Flow is
+  - Create a Feature/Fix branch
+  - Make changes / fixes on this branch
+  - Merge this branch to master
+  - Delete this branch
+
+## Merge Conflicts\*\*
+
+- Use VSCODE. It greatly assists in resolving merge conflicts
+- Refer to this : https://youtu.be/nfOxUaA2trY
+
+## Stashing
+
+- Stashing is putting "temporary" work on a stack.
+  - Like the interrupt process in CPU where CPU puts the current info about process in a stack and after servicing the interrupt request, it pops it back
+  - The information on stash (stack) can be popped back
+
+## git clean
+
+- Source : https://www.atlassian.com/git/tutorials/undoing-changes/git-clean
+
+> git clean command operates on untracked files. Untracked files are files that have been created within your repo's working directory but have not yet been added to the repository's tracking index using the git add command
+
 ## All Commands
 
-| Command                           | Action                                                      |
-| --------------------------------- | ----------------------------------------------------------- |
-| git init                          | Create a git repo                                           |
-| git add `<FILENAME>`              | Stages the file `<FILENAME>`                                |
-| git add .                         | Stages all the files present in directory                   |
-| git commit -m `<message>`         | Commits staged files with a message `<message>`             |
-| git log                           | Shows a list of commits and activites performed in the repo |
-| git status                        | Shows the status of files in the repo                       |
-| git restore --staged `<FILENAME>` | Unstage a file                                              |
-| git restore `<FILENAME>`          | Restores / undoes any changes in the file `<FILENAME>`      |
-| git restore .                     | Restores / undoes all changes in project                    |
+| Command                     | Action                                                                |
+| --------------------------- | --------------------------------------------------------------------- |
+| git init                    | Create a git repo                                                     |
+| git add `<FILENAME>`        | Stages the file `<FILENAME>`                                          |
+| git add .                   | Stages all the files present in directory                             |
+| git commit -m `<message>`   | Commits staged files with a message `<message>`                       |
+| git log                     | Shows a list of commits and activites performed in the repo           |
+| git log --oneline           | Brief list of commits and activites performed in the repo             |
+| git log -`<num>`            | Shows the `<num>` most recent commits                                 |
+| git status                  | Shows the status of files in the repo                                 |
+| git restore -S `<FILENAME>` | Unstage a file                                                        |
+| git restore `<FILENAME>`    | Restores / undoes any changes in the file `<FILENAME>`                |
+| git restore .               | Restores / undoes all changes in project                              |
+| git mv `<on>` `<nn>`        | Changes name of file from `<on>` to `<nn>` and stages it              |
+| git rm `<file>`             | Deletes `<file>` from repo and stages it                              |
+| git diff                    | Shows differences between files. Reference point is last commit       |
+| git commit --amend          | Commits current changes to HEAD (previous commit)                     |
+| git reset --hard `<hash>`   | Restores repo to the commit `<hash>`                                  |
+| git branch                  | Shows available branches in repo. Current branch has `*`              |
+| git checkout -b `<branch>`  | Creates and switches to the branch `<branch>`                         |
+| git checkout `<branch>`     | Switches to the branch `<branch>`                                     |
+| git merge `<branch>`        | Merges the **currently active** branch with `<branch>`                |
+| git branch -D `<branch>`    | Deletes the branch `<branch>`                                         |
+| git stash                   | Stashes (pushes on stack) current changes                             |
+| git stash list              | Shows stashes (changes) present in stash (stack)                      |
+| git stash pop               | Pops the topmost change from stash (stack)                            |
+| git stash apply             | Applies changes from topmost of stash (stack) without popping         |
+| git clean -n                | Dry run to detect untracked files that can be removed                 |
+| git clean -nd               | Dry run to detect untracked files and directories that can be removed |
+| git clean -df               | Removes untracked files and directories                               |
 
-# Local system to github
+## NOTES
+
+- Manual deletion (deleting files manually without using `git rm`) is equivalent to
+  - Deleting the file
+  - Having an "untracked" file (in `git status`) which needs to be staged
+- Manual renaming of file (without using `git mv`) is equivalent to
+
+  - Deleting the original file
+  - Creating a new file with the same content as original file but having a new name
+  - Having a "deleted" file (original) and an "untracked" file (new named file) in `git status`
+
+  > These things can cause problems in stuff like `git diff` and thus, deletion / renaming of files should be done using git commands
+
+- Instead of using `git diff` to see changes in terminal, use vscode extension [Gitlens](https://gitlens.amod.io/)
+
+- A good tutorial for `git commit --amend` : https://youtu.be/Q5I8Y004DQ8
+
+# Github
 
 ## New repo to existing online repo (empty)
 
