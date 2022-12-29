@@ -10,8 +10,14 @@
   - [All Commands](#all-commands)
   - [NOTES](#notes)
 - [Github](#github)
+  - [Basic Terms](#basic-terms)
+  - [Creating a new repo](#creating-a-new-repo)
   - [New repo to existing online repo (empty)](#new-repo-to-existing-online-repo-empty)
   - [Locally created repo to existing online repo (empty)](#locally-created-repo-to-existing-online-repo-empty)
+  - [Pull Requests](#pull-requests)
+  - [Organizing Projects](#organizing-projects)
+  - [Syncing Git and GitHub](#syncing-git-and-github)
+  - [Commands](#commands)
 
 # Git
 
@@ -153,6 +159,21 @@ This setting lets you write a kind of global .gitignore file. The steps to do th
 
 # Github
 
+## Basic Terms
+
+- Local Repo : The repo (git files) which we have locally on our system
+- Remote Repo : The repo which is stored in a "remote" location (github, for example)
+- Remote : A location where files can be uploaded to / fetched from
+  - A remote consists of a name and a variable
+  - A common name for a remote is **origin**
+- An "upstream" link is a link from where you can pull and push changes.
+
+## Creating a new repo
+
+- To create a new repo, login to your github account
+- Then navigate to the URL github.new
+- You will get the options to create a new repo
+
 ## New repo to existing online repo (empty)
 
 ```sh
@@ -166,10 +187,47 @@ git push -u origin main
 
 ## Locally created repo to existing online repo (empty)
 
-- The commands which need to be executed on terminal are as follows
-
 ```sh
 git remote add origin <link_of_existing_repo>
 git branch -M main
 git push -u origin main
 ```
+
+## Pull Requests
+
+- It's like merging branches but on GitHub
+- The pull requests can be reviewed by owner and others
+- It also has a "comments" section where discussion can be done regarding the new changes
+- After appropriate verification, the changes are merged to the main branch
+
+## Organizing Projects
+
+- To organize projects, GitHub provides us with these things
+  - Contributors : People who have contributed in development of the project
+  - Issues : A space where encountered issues in the project are reported and later rectified
+  - Labels : Used for categorizing information
+  - Milestones : A method to group issues together. Like taking care of all the issues in "Final Review" milestone.
+  - Projects : Kanban boards on steroids
+- Collaborators
+  - Go to settings in GitHub repo
+  - Then invite a collaborator
+  - Used for private projects
+
+## Syncing Git and GitHub
+
+- Clone : Clones the online repo to our local machine
+- Fetch : Obtains information from online repo and displays it with local repo
+- Pull : Pulls changes from repo to local repo
+
+## Commands
+
+| Command                           | Action                                                          |
+| --------------------------------- | --------------------------------------------------------------- |
+| git remote add `<name>` `<URL>`   |                                                                 |
+| git remote -v                     | Displays lists of remotes used by this repo                     |
+| git rename `<old>` `<new>`        | Renames `<old>` remote name to `<new>` remote name              |
+| git push `<remote>` `<branch>`    | Pushes `<branch>` to `<remote>`                                 |
+| git push -u `<remote>` `<branch>` | Pushes `<branch>` to `<remote>` and sets `<remote>` as upstream |
+| git push --all                    | Pushes all branches                                             |
+| git clone `<repo>`                | Downloads `<repo>` from GitHub to local system                  |
+| git fetch                         | Fetches information from remote repo and display it             |
