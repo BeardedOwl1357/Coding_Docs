@@ -2,7 +2,7 @@
 
 # Tips and Tricks
 
-1. https://youtu.be/GfCpCZIsvaE
+1. [How to compare files in vscode side by side | 5-Minute DevOps](https://youtu.be/GfCpCZIsvaE)
 
 # Shortcuts
 

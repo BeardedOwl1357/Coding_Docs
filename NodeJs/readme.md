@@ -7,6 +7,7 @@
   - [setInterval() and clearInterval()](#setinterval-and-clearinterval)
 - [Node Modules](#node-modules)
   - [Taking user input](#taking-user-input)
+  - [Reading from a file line-by-line](#reading-from-a-file-line-by-line)
   - [Path Module](#path-module)
   - [Fs Module](#fs-module)
 - [Exporting Modules](#exporting-modules)
@@ -166,6 +167,31 @@ askQuestions(questions, (answers) => {
 });
 ```
 
+## Reading from a file line-by-line
+
+```js
+// Modules used
+const fs = require("fs");
+const readLine = require("readline");
+
+const file_path = "./links.txt";
+const encoding_format = "utf-8";
+
+// Creating a stream for readling links.txt
+const file = readLine.createInterface({
+  input: fs.createReadStream(file_path, encoding_format),
+  output: process.stdout,
+  terminal: false,
+});
+
+let num = 0;
+// Reading the file line by line
+file.on("line", (line) => {
+  console.log(`${num} \t -----> \t ${line}`);
+  num += 1;
+});
+```
+
 ## Path Module
 
 - This is an extensive module. Will be mentioning functions which I have used
@@ -318,8 +344,7 @@ sayHello();
 ## TODO : package-lock.json ?
 
 - When we use the caret versioning, we say that any minor release will be accepted
-- However
-- https://www.youtube.com/watch?v=H3n75nHN5qY
+- [package-lock.json explained](https://www.youtube.com/watch?v=H3n75nHN5qY)
 
 ## npm Cache
 
@@ -330,8 +355,8 @@ sayHello();
 
 - Resources
 
-  - https://youtu.be/kwn7tHJJoLA
-  - https://youtu.be/-SaZiADGLHs
+  - [NPM - pre & post scripts](https://youtu.be/kwn7tHJJoLA)
+  - [Things Every Developer Should Know About package.json](https://youtu.be/-SaZiADGLHs)
 
 - Scripting
   - Allows us to execute commands inside terminal
@@ -420,6 +445,6 @@ console.log(multiLineString);
 
 ## Important Videos to Watch
 
-- [ ] https://youtu.be/l20MBBFZAmA
-- [ ] https://youtu.be/FZOEL5nByYg
+- [ ] [Events and Event Emitter in Node.js](https://youtu.be/l20MBBFZAmA)
+- [ ] [Hardest Backend Node.js Concept to Master](https://youtu.be/FZOEL5nByYg)
 - [ ] [NodeJs advanced concepts](https://youtu.be/1usPp_5mkG0)

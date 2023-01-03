@@ -247,5 +247,5 @@ public class App{
 
 # Useful Tutorials
 
-- [Installing Java and using it with Vscode](https://www.youtube.com/watch?v=KiDwLEikUho)
-- [Printf in Java](https://www.youtube.com/watch?v=c2B_Av3x65s)
+- [Java printf 🖨️](https://www.youtube.com/watch?v=c2B_Av3x65s)
+- [How to Run Java Program in Visual Studio Code | VS Code Java](https://www.youtube.com/watch?v=KiDwLEikUho)

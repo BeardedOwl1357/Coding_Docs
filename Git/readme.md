@@ -93,7 +93,7 @@ This setting lets you write a kind of global .gitignore file. The steps to do th
 ## Merge Conflicts\*\*
 
 - Use VSCODE. It greatly assists in resolving merge conflicts
-- Refer to this : https://youtu.be/nfOxUaA2trY
+- Refer to this : [Resolving Merge Conflicts (With Example) | Git Tutorials #17](https://youtu.be/nfOxUaA2trY)
 
 ## Stashing
 
@@ -155,7 +155,7 @@ This setting lets you write a kind of global .gitignore file. The steps to do th
 
 - Instead of using `git diff` to see changes in terminal, use vscode extension [Gitlens](https://gitlens.amod.io/)
 
-- A good tutorial for `git commit --amend` : https://youtu.be/Q5I8Y004DQ8
+- A good tutorial for `git commit --amend` : [#3 Learning Git | Amending Commits](https://youtu.be/Q5I8Y004DQ8)
 
 # Github
 
