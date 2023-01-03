@@ -18,6 +18,7 @@
   - [Organizing Projects](#organizing-projects)
   - [Syncing Git and GitHub](#syncing-git-and-github)
   - [Commands](#commands)
+- [Resources / Articles](#resources--articles)
 
 # Git
 
@@ -109,36 +110,37 @@ This setting lets you write a kind of global .gitignore file. The steps to do th
 
 ## All Commands
 
-| Command                     | Action                                                                |
-| --------------------------- | --------------------------------------------------------------------- |
-| git init                    | Create a git repo                                                     |
-| git add `<FILENAME>`        | Stages the file `<FILENAME>`                                          |
-| git add .                   | Stages all the files present in directory                             |
-| git commit -m `<message>`   | Commits staged files with a message `<message>`                       |
-| git log                     | Shows a list of commits and activites performed in the repo           |
-| git log --oneline           | Brief list of commits and activites performed in the repo             |
-| git log -`<num>`            | Shows the `<num>` most recent commits                                 |
-| git status                  | Shows the status of files in the repo                                 |
-| git restore -S `<FILENAME>` | Unstage a file                                                        |
-| git restore `<FILENAME>`    | Restores / undoes any changes in the file `<FILENAME>`                |
-| git restore .               | Restores / undoes all changes in project                              |
-| git mv `<on>` `<nn>`        | Changes name of file from `<on>` to `<nn>` and stages it              |
-| git rm `<file>`             | Deletes `<file>` from repo and stages it                              |
-| git diff                    | Shows differences between files. Reference point is last commit       |
-| git commit --amend          | Commits current changes to HEAD (previous commit)                     |
-| git reset --hard `<hash>`   | Restores repo to the commit `<hash>`                                  |
-| git branch                  | Shows available branches in repo. Current branch has `*`              |
-| git checkout -b `<branch>`  | Creates and switches to the branch `<branch>`                         |
-| git checkout `<branch>`     | Switches to the branch `<branch>`                                     |
-| git merge `<branch>`        | Merges the **currently active** branch with `<branch>`                |
-| git branch -D `<branch>`    | Deletes the branch `<branch>`                                         |
-| git stash                   | Stashes (pushes on stack) current changes                             |
-| git stash list              | Shows stashes (changes) present in stash (stack)                      |
-| git stash pop               | Pops the topmost change from stash (stack)                            |
-| git stash apply             | Applies changes from topmost of stash (stack) without popping         |
-| git clean -n                | Dry run to detect untracked files that can be removed                 |
-| git clean -nd               | Dry run to detect untracked files and directories that can be removed |
-| git clean -df               | Removes untracked files and directories                               |
+| Command                       | Action                                                                |
+| ----------------------------- | --------------------------------------------------------------------- |
+| git init                      | Create a git repo                                                     |
+| git add `<FILENAME>`          | Stages the file `<FILENAME>`                                          |
+| git add .                     | Stages all the files present in directory                             |
+| git commit -m `<message>`     | Commits staged files with a message `<message>`                       |
+| git log                       | Shows a list of commits and activites performed in the repo           |
+| git log --oneline             | Brief list of commits and activites performed in the repo             |
+| git log -`<num>`              | Shows the `<num>` most recent commits                                 |
+| git status                    | Shows the status of files in the repo                                 |
+| git restore -S `<FILENAME>`   | Unstage a file                                                        |
+| git restore `<FILENAME>`      | Restores / undoes any changes in the file `<FILENAME>`                |
+| git restore .                 | Restores / undoes all changes in project                              |
+| git mv `<on>` `<nn>`          | Changes name of file from `<on>` to `<nn>` and stages it              |
+| git rm `<file>`               | Deletes `<file>` from repo and stages it                              |
+| git diff                      | Shows differences between files. Reference point is last commit       |
+| git commit --amend            | Commits current changes to HEAD (previous commit)                     |
+| git push -f origin `<branch>` | Amending to a pushed commit                                           |
+| git reset --hard `<hash>`     | Restores repo to the commit `<hash>`                                  |
+| git branch                    | Shows available branches in repo. Current branch has `*`              |
+| git checkout -b `<branch>`    | Creates and switches to the branch `<branch>`                         |
+| git checkout `<branch>`       | Switches to the branch `<branch>`                                     |
+| git merge `<branch>`          | Merges the **currently active** branch with `<branch>`                |
+| git branch -D `<branch>`      | Deletes the branch `<branch>`                                         |
+| git stash                     | Stashes (pushes on stack) current changes                             |
+| git stash list                | Shows stashes (changes) present in stash (stack)                      |
+| git stash pop                 | Pops the topmost change from stash (stack)                            |
+| git stash apply               | Applies changes from topmost of stash (stack) without popping         |
+| git clean -n                  | Dry run to detect untracked files that can be removed                 |
+| git clean -nd                 | Dry run to detect untracked files and directories that can be removed |
+| git clean -df                 | Removes untracked files and directories                               |
 
 ## NOTES
 
@@ -231,3 +233,7 @@ git push -u origin main
 | git push --all                    | Pushes all branches                                             |
 | git clone `<repo>`                | Downloads `<repo>` from GitHub to local system                  |
 | git fetch                         | Fetches information from remote repo and display it             |
+
+# Resources / Articles
+
+- https://stackoverflow.com/questions/44582268/how-to-change-name-of-git-commit-that-was-pushed

@@ -12,14 +12,15 @@
   - [x] Floating point numbers (floats)
   - [ ] Math Libraries (if any). Math functions like Floor,Ceil,Round etc.
 - [ ] Conditionals (If/Else)
-  - [ ] Logical Operators (AND,OR,NOT,NOR,XOR)
+  - [x] Logical Operators (AND,OR,NOT,NOR,XOR)
   - [x] Nested Conditionals
-  - [ ] Switch Case
+  - [x] Switch Case
+- [x] Operator Precedence
 - [ ] Looping
-  - [ ] For Loop
-  - [ ] While Loop
+  - [x] For Loop
+  - [x] While Loop
   - [ ] (Optional) Do While loop
-  - [ ] [Basic Patterns](https://www.tutorjoes.in/c_programming_tutorial/for_loop_pattern_examples) (Must do as this well help you practice for-loops)
+  - [x] [Basic Patterns](https://www.tutorjoes.in/c_programming_tutorial/for_loop_pattern_examples) (Must do as this well help you practice for-loops) **One pattern remaining**
   - [ ] (Optional but super useful) For Each loop
   - [ ] (Python Specific) Enumerates
   - [ ] Break and Continue Statement

@@ -11,10 +11,13 @@
   - [TODO : Width and Precision](#todo--width-and-precision)
   - [Flags](#flags)
 - [Conditionals](#conditionals)
+  - [Logical Operators](#logical-operators)
   - [If-Else](#if-else)
   - [Switch Statement](#switch-statement)
-  - [TODO : Switch Expressions](#todo--switch-expressions)
-  - [TODO : Logical and Relational Operators](#todo--logical-and-relational-operators)
+- [Operator Precedence](#operator-precedence)
+- [Looping](#looping)
+  - [While Loop](#while-loop)
+  - [For Loop](#for-loop)
 - [Useful Tutorials](#useful-tutorials)
 
 # Progress
@@ -190,6 +193,14 @@ public class App{
 
 # Conditionals
 
+## Logical Operators
+
+| Operator | Symbol |
+| -------- | ------ |
+| AND      | &&     |
+| OR       | \|\|   |
+| NOT      | !      |
+
 ## If-Else
 
 ```java
@@ -241,9 +252,77 @@ public class App{
 
 > Generally advisable to use `if-else-if`.
 
-## TODO : Switch Expressions
+# Operator Precedence
 
-## TODO : Logical and Relational Operators
+- The article which contains all precedences is this : [Java Operator Precedence](https://www.javatpoint.com/java-operator-precedence)
+- A shorthand summary of operator precedence (Note : Terms in `()` means that they have same priority)
+  - Parenthesis have the highest priority
+  - Logical Operators : && , || , ! ........ Executed from left to right
+  - Arithmetic Operators : (\*, /, %), (+, -) .............. Executed from left to right
+
+# Looping
+
+## While Loop
+
+The syntax is
+
+```java
+while(condition)
+{
+    // Do Stuff
+}
+```
+
+An example program
+
+```java
+import java.util.Scanner;
+
+public class App{
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many times do wish to be greeted?");
+        int count = scanner.nextInt();
+        System.out.println("------------------------------");
+        // While Loop
+        while(count != 0){
+            System.out.println(count + "\t" + "Hello Human");
+            count -= 1;
+        }
+        scanner.close();
+    }
+}
+```
+
+## For Loop
+
+- Syntax is
+
+```java
+for(initialization,condition,updation){
+    // Do stuff
+}
+```
+
+Sample Program
+
+```java
+import java.util.Scanner;
+
+public class App{
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many times do wish to be greeted?");
+        int count = scanner.nextInt();
+        System.out.println("------------------------------");
+        // For Loop
+        for(; count > 0; count -= 1){
+            System.out.println(count + "\t" + "Hello Human");
+        }
+        scanner.close();
+    }
+}
+```
 
 # Useful Tutorials
 
