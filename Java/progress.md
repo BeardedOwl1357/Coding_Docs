@@ -23,7 +23,7 @@
   - [x] [Basic Patterns](https://www.tutorjoes.in/c_programming_tutorial/for_loop_pattern_examples) (Must do as this well help you practice for-loops) **One pattern remaining**
   - [ ] (Optional but super useful) For Each loop
   - [ ] (Python Specific) Enumerates
-  - [ ] Break and Continue Statement
+  - [x] Break and Continue Statement
 - [ ] Arrays / Lists (For each datatype)
   - [ ] Creation
   - [ ] Accessing Elements
@@ -54,16 +54,17 @@
   - [ ] (Optional) Converting to list (array)
   - [ ] (Optional) Converting an array to string
 - [ ] Functions
-  - [ ] Creation
-  - [ ] Usage
+  - [x] Creation
+  - [x] Usage
   - [ ] Lambda function (optional)
   - [ ] Call by value and call by reference
   - [ ] Pointers (mostly used in C and Java)
 - [ ] Object Oriented Programming (OOPS)
   - [ ] Creation of classes
+  - [ ] Constructors
   - [ ] Inhertiance
   - [ ] Abstraction
-  - [ ] Overloaded functions
+  - [x] Overloaded functions
   - [ ] (optional) Overloading operators
   - [ ] How to create an instance / object of a class
 - [ ] File Handling

@@ -18,6 +18,17 @@
 - [Looping](#looping)
   - [While Loop](#while-loop)
   - [For Loop](#for-loop)
+  - [Continue Statement](#continue-statement)
+  - [Break Statement](#break-statement)
+  - [For-Each Loop](#for-each-loop)
+- [Functions / Methods](#functions--methods)
+  - [Basics](#basics-1)
+  - [Variable Scope](#variable-scope)
+  - [Function Overloading](#function-overloading)
+- [OOPS (Object Oriented Programing Systems)](#oops-object-oriented-programing-systems)
+  - [Packages](#packages)
+  - [Creation of Classes](#creation-of-classes)
+  - [Constructors](#constructors)
 - [Useful Tutorials](#useful-tutorials)
 
 # Progress
@@ -324,7 +335,209 @@ public class App{
 }
 ```
 
+## Continue Statement
+
+```java
+public class App{
+    public static void main(String args[]){
+        for(int i = 0; i < 5; ++i){
+            if(i == 3)
+                continue;
+            System.out.println(i);
+        }
+    }
+}
+```
+
+## Break Statement
+
+```java
+public class App{
+    public static void main(String args[]){
+        for(int i = 0; i < 5; ++i){
+            if(i == 3)
+                break;
+            System.out.println(i);
+        }
+    }
+}
+```
+
+## For-Each Loop
+
+- Refer to this : [For-each Loop in Java](https://www.geeksforgeeks.org/for-each-loop-in-java/)
+
+```java
+public class App{
+    public static void main(String args[]){
+        int nums[] = {10,156,8165,321,16,14,32,14};
+        for(int num : nums)
+            System.out.print(num + " ");
+    }
+}
+```
+
+# Functions / Methods
+
+## Basics
+
+- Here, functions are called methods because everything is an object in Java (and objects have methods)
+- The anatomy of a method is as follows
+
+```
+<access_modifier> <non_access_modifier> <return_type> <name>(<parameters>)
+{
+    // Body
+}
+```
+
+| Term                | Meaning                                                   |
+| ------------------- | --------------------------------------------------------- |
+| access_modifier     | Defines who can access the function                       |
+| non_access_modifier | (Optional) ??                                             |
+| return_type         | What kind of data the method returns after it is executed |
+| name                | The name by which the method is referred to               |
+| parameters          | The input a function takes                                |
+
+Notes:
+
+- By default, the access_modifier for a method is private
+- Every method requires a return type. If the method does not return anything, use the `void` return_type
+- The singature of a method is the combination of name and its parameters
+  - Signature needs to be unique for each method
+
+> Even if name of the two methods is same, if the parameters are different, then they are considered as different methods
+
+## Variable Scope
+
+- Global Variables : Variables which are defined in a class. Can be accessed by any function in the class
+- Local Variables : Variables which are local to the "block" (`{}`) they are defined in. Can only be accessed inside the block they are defined in
+
+> In case the global and local variables have same names, then first preference will be given to the local variable.
+> To access the global variable and overriding the default behavior (of selecting the local variable first), we use the `this` keyword
+
+## Function Overloading
+
+**Even if name of the two methods is same, if the parameters are different, then they are considered as different methods**
+
+```java
+public class App{
+    public static int sum(int a, int b){
+        return(a+b);
+    }
+    public static int sum(int a, int b, int c){
+        return(a+b+c);
+    }
+
+    public static int day(String day){
+        int ans;
+        switch(day){
+            case "Sun" : ans = 1; break;
+            case "Mon" : ans = 2; break;
+            case "Tue" : ans = 3; break;
+            case "Wed" : ans = 4; break;
+            case "Thu" : ans = 5; break;
+            case "Fri" : ans = 6; break;
+            case "Sat" : ans = 7; break;
+            default : ans = 0;
+        }
+        return ans;
+    }
+
+    public static String day(int day){
+        String ans;
+        switch(day){
+            case 1 : ans = "Sun"; break;
+            case 2 : ans = "Mon"; break;
+            case 3 : ans = "Tue"; break;
+            case 4 : ans = "Wed"; break;
+            case 5 : ans = "Thu"; break;
+            case 6 : ans = "Fri"; break;
+            case 7 : ans = "Sat"; break;
+            default : ans = "X";
+        }
+        return ans;
+    }
+
+    public static void main(String args[]){
+        System.out.println(sum(3,4));
+        System.out.println(sum(3,4,5));
+        System.out.println(day("Mon"));
+        System.out.println(day(2));
+    }
+}
+```
+
+# OOPS (Object Oriented Programing Systems)
+
+## Packages
+
+- It is a "folder" where classes can be categorized
+- For example, let us assume we have a "folder" / package called "Geometery".
+  - In this, various geometrical figures such as Rectangle, Circle, Square etc. can be stored
+  - For each geometrical figure, we need to create a separate class
+  - However, they all have one thing in common : That they are geometrical figures
+  - Therefore, the package "Geometry" becomes a way to group them
+- Check this to learn how to work with packages : [Java-Basic-Package-Example by BeardedOwl1357](https://github.com/BeardedOwl1357/Java-Basic-Package-Example)
+
+## Creation of Classes
+
+- The general syntax to define a class
+
+```
+<access_specifier> class <class_name> extends <parent_1>,<parent_2> ... {
+    // Body
+}
+```
+
+> Note : The `extended` keyword is used for inheritance. Ignore it for now. See the below example
+
+```java
+public class Rectangle{
+    public double length, breadth;
+
+    public Rectangle(){
+        this.length = 0;
+        this.breadth = 0;
+    }
+
+    public Rectangle(double length, double breadth){
+        this.length = length; // this.length is the class / global variable
+        this.breadth = breadth; // this.breadth is the class / global variable
+    }
+
+    public double getArea(){
+        return length*breadth;
+    }
+
+    public double getPerimeter(){
+        return 2*(length + breadth);
+    }
+
+    public double getLength(){
+        return length;
+    }
+
+    public double getBreadth(){
+        return breadth;
+    }
+}
+```
+
+## Constructors
+
+- Method which executes when an object is created
+- By default, each class has an empty constructor
+- The name of the constructor must be the same as the name of the class
+
 # Useful Tutorials
 
 - [Java printf 🖨️](https://www.youtube.com/watch?v=c2B_Av3x65s)
 - [How to Run Java Program in Visual Studio Code | VS Code Java](https://www.youtube.com/watch?v=KiDwLEikUho)
+- [Oracle Documentation : Packages](https://docs.oracle.com/javase/tutorial/java/package/index.html)
+- [Packages in Java](https://youtu.be/k7TwStbkK70)
+- [Java Tutorial: Creating Packages in Java](https://youtu.be/av816KIz8nM)
+
+```
+
+```
