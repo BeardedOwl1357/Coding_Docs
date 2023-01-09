@@ -47,12 +47,15 @@
   - [ ] Displaying
   - [ ] Checking whether strings can be modified or not (specific to each programming language)
 - [ ] String Operations
-  - [ ] String Length
-  - [ ] Concatenation
+  - [x] String Length
+  - [x] Concatenation
+  - [x] Comparison
   - [ ] Padding
   - [ ] Trimming
-  - [ ] (Optional) Converting to list (array)
+  - [x] Reversing
+  - [x] (Optional) Converting to list (array) / Splitting into words
   - [ ] (Optional) Converting an array to string
+  - [x] (Optional) Multiline Strings
 - [ ] Functions
   - [x] Creation
   - [x] Usage
@@ -61,12 +64,14 @@
   - [ ] Pointers (mostly used in C and Java)
 - [ ] Object Oriented Programming (OOPS)
   - [ ] Creation of classes
-  - [ ] Constructors
-  - [ ] Inhertiance
+  - [x] Constructors
+  - [x] Inhertiance
   - [ ] Abstraction
   - [x] Overloaded functions
+  - [x] Overriding Functions
+  - [x] Polymorphism
   - [ ] (optional) Overloading operators
-  - [ ] How to create an instance / object of a class
+  - [x] How to create an instance / object of a class
 - [ ] File Handling
   - [ ] Opening a file
   - [ ] Reading from a file

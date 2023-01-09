@@ -1,3 +1,7 @@
+Do not read this in one go. This is just for referencing purposes
+
+**TABLE OF CONTENTS**
+
 - [Progress](#progress)
 - [Basics](#basics)
   - [Basic Structure of a Program](#basic-structure-of-a-program)
@@ -25,10 +29,30 @@
   - [Basics](#basics-1)
   - [Variable Scope](#variable-scope)
   - [Function Overloading](#function-overloading)
-- [OOPS (Object Oriented Programing Systems)](#oops-object-oriented-programing-systems)
+- [TODO : OOPS (Object Oriented Programing Systems)](#todo--oops-object-oriented-programing-systems)
   - [Packages](#packages)
   - [Creation of Classes](#creation-of-classes)
   - [Constructors](#constructors)
+  - [Inheritance](#inheritance)
+    - [Rules](#rules)
+    - [Overriding and Overloading Inherited Methods](#overriding-and-overloading-inherited-methods)
+    - [TODO : Sealed Classes](#todo--sealed-classes)
+  - [Polymorphism](#polymorphism)
+    - [Typecasting](#typecasting)
+    - [instanceOf](#instanceof)
+  - [Wrapper Classes](#wrapper-classes)
+  - [OOPS RULES](#oops-rules)
+    - [Inheritance](#inheritance-1)
+    - [Overriding and Overloading Inherited Methods](#overriding-and-overloading-inherited-methods-1)
+    - [Polymorphism](#polymorphism-1)
+- [Arrays](#arrays)
+  - [Variable Arguments](#variable-arguments)
+- [TODO : String Operations](#todo--string-operations)
+  - [Length of string](#length-of-string)
+  - [Splitting in words](#splitting-in-words)
+  - [Reverse](#reverse)
+  - [Comparison](#comparison)
+  - [Multiline Strings (Codeblocks)](#multiline-strings-codeblocks)
 - [Useful Tutorials](#useful-tutorials)
 
 # Progress
@@ -468,7 +492,7 @@ public class App{
 }
 ```
 
-# OOPS (Object Oriented Programing Systems)
+# TODO : OOPS (Object Oriented Programing Systems)
 
 ## Packages
 
@@ -481,6 +505,8 @@ public class App{
 - Check this to learn how to work with packages : [Java-Basic-Package-Example by BeardedOwl1357](https://github.com/BeardedOwl1357/Java-Basic-Package-Example)
 
 ## Creation of Classes
+
+**The class Object is the superclass to every single class.**
 
 - The general syntax to define a class
 
@@ -529,6 +555,477 @@ public class Rectangle{
 - Method which executes when an object is created
 - By default, each class has an empty constructor
 - The name of the constructor must be the same as the name of the class
+
+## Inheritance
+
+### Rules
+
+- A class can inherit from another class using the `extends` keyword
+  **Parent and Child Class**
+- A superclass's (parent class) constructor is executed before the subclass (derived class) constructor
+- Explicit call to parent class's constructor can be made from the constructor of derived class. It is done by using the `super()` keyword
+  - However, this call must be the first line of the constructor
+  - Otherwise the program will not work
+- If superclass does not have a constructor (explicitly defined default constructor), then the subclass needs to manually invoke the constructor of superclass
+
+**Access Specifiers, functions and constructors**
+
+- Public and Protected fields and methods are inherited by children
+- Constructors are not inherited by children
+- Private members are not inherited
+- Final methods are inherited but cannot be overridden
+
+**Demonstration of Basic Inhertiance**
+
+- A demonstration is as follows
+  - The package is "human". This package contains two classes, "Person" and "Employee"
+  - Employee class inherits from Person
+
+```java
+// Person.java
+package humans;
+
+public class Person {
+    private int age;
+    private String firstName;
+    private String lastName;
+
+    public Person(String firstName, String lastName,int age){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+    // Getters and Setters
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+}
+
+```
+
+```java
+// Employee.java
+package humans;
+
+public class Employee extends Person{
+    private int id;
+    public Employee(String firstName, String lastName, int age, int id) {
+        super(firstName,lastName,age);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+
+```
+
+```java
+// Main.java
+import humans.Employee;
+public class Main{
+    public static void main(String args[]){
+        Employee emp = new Employee("Sanchay","Joshi",15,163577);
+        System.out.println("Full Name = " + emp.getFullName());
+        System.out.println("Age = " + emp.getAge());
+        System.out.println("ID = " + emp.getId());
+    }
+}
+```
+
+### Overriding and Overloading Inherited Methods
+
+- Terms
+  - Overriding : Same function signature BUT different body
+  - Overloading : Different function signature (name is same, parameters are different) and different body
+- As a matter of convention, whenever we are overriding a method, use the `@Override` symbol
+  - Parent Class = "A.java"
+  - Derived Class = "B.java"
+
+**Overriding**
+
+```java
+// A.java
+package humans;
+
+public class A{
+    public void greet(){
+        System.out.println("I am from Class A");
+    }
+}
+```
+
+```java
+// B.java
+package humans;
+
+public class B extends A{
+    @Override
+    public void greet(){
+        System.out.println("I am from Class B");
+    }
+}
+```
+
+```java
+// Main.java
+import humans.A;
+import humans.B;
+public class Main{
+    public static void main(String args[]){
+        A a = new A();
+        B b = new B();
+        a.greet();
+        b.greet();
+    }
+}
+```
+
+**Overloading**
+
+```java
+// A.java
+package humans;
+
+public class A{
+    public void greet(){
+        System.out.println("Parent Original Function");
+    }
+}
+```
+
+```java
+// B.java
+package humans;
+
+public class B extends A{
+    public void greet(String message){
+        System.out.println("Derived, Overloaded Function \n" + message);
+
+    }
+}
+```
+
+```java
+// Main.java
+import humans.A;
+import humans.B;
+public class Main{
+    public static void main(String args[]){
+        A a = new A();
+        B b = new B();
+        a.greet();
+        b.greet(); // Parent Function
+        b.greet("Yeh hai message"); // Overloaded function is
+    }
+}
+```
+
+### TODO : Sealed Classes
+
+- A class which only allows a limited amount of classes to "extend" it (inherit from it)
+- [Sealed Classes Tutorial](https://www.youtube.com/watch?v=glvYULuaf-k)
+
+## Polymorphism
+
+- Polymorphism means "Ability to take multiple forms"
+- In practical terms, a parent class can act as its children
+- Rules
+  - An object can have a superclass type and subclass instance
+  - If a method is overridden by subclass, then the polymorphic object will execute the overridden method at runtime
+- See the below example
+  - "Animal" is the parent class
+  - "Dog" is derived from "Animal" and has a function called greet();
+  - "Cat" is derived from "Animal" and has a function called greet();
+
+```java
+// Animal.java
+package animals;
+
+public class Animal{
+    public void greet(){
+        System.out.println("I am an animal");
+    }
+}
+```
+
+```java
+// Dog.java
+package animals;
+
+public class Dog extends Animal{
+    public void greet() {
+        System.out.println("I am a dog");
+    }
+}
+```
+
+```java
+// Cat.java
+package animals;
+
+public class Cat extends Animal{
+    public void greet(){
+        System.out.println("I am a Cat");
+    }
+}
+```
+
+```java
+// Main.java
+import animals.*;
+public class Main{
+    public static void main(String args[]){
+        Animal a = new Animal(); // Animal acts like Animal
+        Animal d = new Dog(); // Animal acts like Dog
+        Animal c = new Cat(); // Animal acts like Cat
+        a.greet();
+        d.greet();
+        c.greet();
+    }
+}
+```
+
+### Typecasting
+
+- We can make the parent object acts as its children HOWEVER to access the fields and methods of the child, a typecasting is required
+  - A typecast from parent to child is called downcast
+
+```java
+// Dog.java
+package animals;
+
+public class Dog extends Animal{
+    public void greet() {
+        System.out.println("I am a dog");
+    }
+
+    public void bite(){
+        System.out.println("BITING...");
+    }
+}
+```
+
+```java
+// Main.java
+import animals.*;
+public class Main{
+    public static void main(String args[]){
+        Animal a = new Dog(); // Animal acts like Dog
+        // Animal does not have bite however we can make it bite
+        ((Dog)a).bite();
+    }
+}
+```
+
+### instanceOf
+
+- Used to determine whether the object is an instance of a "class" or not
+- [Using the code from above](#polymorphism)
+
+```java
+// Main.java
+import animals.*;
+public class Main{
+    public static void main(String args[]){
+        Animal d = new Dog();
+        Animal c = new Cat();
+        feed(d);
+        feed(c);
+        feed(new Animal());
+    }
+
+    public static void feed(Animal x){
+        if(x instanceof Dog)
+            System.out.println("Feeding dog food");
+        else if(x instanceof Cat)
+            System.out.println("Feeding cat food");
+        else
+            System.out.println("Feeding meat");
+    }
+}
+```
+
+## Wrapper Classes
+
+- They are object representation of primitive data types
+
+## OOPS RULES
+
+### Inheritance
+
+**Parent and Child Class**
+
+- A superclass's (parent class) constructor is executed before the subclass (derived class) constructor
+- Explicit call to parent class's constructor can be made from the constructor of derived class. It is done by using the `super()` keyword
+  - However, this call must be the first line of the constructor
+  - Otherwise the program will not work
+- If superclass does not have a constructor (explicitly defined default constructor), then the subclass needs to manually invoke the constructor of superclass
+
+**Access Specifiers, functions and constructors**
+
+- Public and Protected fields and methods are inherited by children
+- Constructors are not inherited by children
+- Private members are not inherited
+- Final methods are inherited but cannot be overridden
+
+### Overriding and Overloading Inherited Methods
+
+- Terms
+  - Overriding : Same function signature BUT different body
+  - Overloading : Different function signature (name is same, parameters are different) and different body
+- As a matter of convention, whenever we are overriding a method, use the `@Override` symbol
+
+### Polymorphism
+
+- An object can have a superclass type and subclass instance
+- If a method is overridden by subclass, then the polymorphic object will execute the overridden method at runtime
+
+# Arrays
+
+- 0 based indexing (counting starts from 0). Element at 0th index is called the "first element".
+- The syntax to create an array is defined as
+
+```
+<datatype>[] <array_name> = new <datatype>[<size>]
+```
+
+- If values are already known, arrays can be assigned like this
+
+```java
+public class App{
+    public static void main(String args[]){
+        int[] abc = {5,4,89};
+        for(int x : abc)
+            System.out.print(x + " ");
+        System.out.println();
+    }
+}
+```
+
+## Variable Arguments
+
+- Allows a function to have various parameters of the same data type
+- Uses arrays as "internal implementation"
+
+**The variable argument must be the final / last parameter in the function.**
+
+See the following example
+
+```java
+public class App{
+    public static void sum(int ...nums){
+        int Sum = 0;
+        for(int x : nums)
+            Sum += x;
+        System.out.println("Sum = " + Sum);
+    }
+    public static void main(String args[]){
+        sum();
+        sum(1);
+        sum(1,2);
+        sum(1,2,3,4,5);
+        sum(new int[] {1,2,3,4,5,6,7});
+    }
+}
+```
+
+# TODO : String Operations
+
+## Length of string
+
+```java
+public class App{
+    public static void main(String args[]){
+        String x = new String("lmao");
+        System.out.println("Length of string = " + x.length());
+    }
+}
+```
+
+## Splitting in words
+
+```java
+public class App{
+    public static void main(String args[]){
+        String x = new String("This string has many words");
+        String words[] = x.split(" ");
+        for(String word : words)
+            System.out.print(word + " ");
+        System.out.println();
+    }
+}
+```
+
+## Reverse
+
+```java
+public class App{
+    public static void main(String args[]){
+        String s = "This is weird";
+        StringBuilder sb = new StringBuilder(s);
+        sb.reverse();
+        System.out.println(sb);
+    }
+}
+```
+
+## Comparison
+
+```java
+public class App{
+    public static void main(String args[]){
+        String s1 = "Hello world";
+        String s2 = "hello world";
+        System.out.println(s1.equals(s2)); // Checks case
+        System.out.println(s1.equalsIgnoreCase(s2)); // Ignores Case
+    }
+}
+```
+
+## Multiline Strings (Codeblocks)
+
+```java
+public class App{
+    public static void main(String args[]){
+        String x = """
+                This is good
+                Yay
+                "abc" : "def"
+                """;
+        System.out.println(x);
+    }
+}
+```
 
 # Useful Tutorials
 
