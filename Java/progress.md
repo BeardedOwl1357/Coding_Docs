@@ -5,12 +5,12 @@
   - [x] Declaration of variables
   - [x] Different variable types
   - [x] Taking user input
-- [ ] Math
+- [x] Math
   - [x] Basic Arithmetic (Addition, Subtraction, Division, Multiplication)
   - [x] Intermediate Arithmetic (Modulo)
   - [x] Modulo of negative numbers
   - [x] Floating point numbers (floats)
-  - [ ] Math Libraries (if any). Math functions like Floor,Ceil,Round etc.
+  - [x] Math Libraries (if any). Math functions like Floor,Ceil,Round etc.
 - [ ] Conditionals (If/Else)
   - [x] Logical Operators (AND,OR,NOT,NOR,XOR)
   - [x] Nested Conditionals
@@ -21,17 +21,17 @@
   - [x] While Loop
   - [ ] (Optional) Do While loop
   - [x] [Basic Patterns](https://www.tutorjoes.in/c_programming_tutorial/for_loop_pattern_examples) (Must do as this well help you practice for-loops) **One pattern remaining**
-  - [ ] (Optional but super useful) For Each loop
+  - [x] (Optional but super useful) For Each loop
   - [ ] (Python Specific) Enumerates
   - [x] Break and Continue Statement
 - [ ] Arrays / Lists (For each datatype)
-  - [ ] Creation
-  - [ ] Accessing Elements
-  - [ ] Insert
-  - [ ] Delete
-  - [ ] Getting Length
+  - [x] Creation
+  - [x] Accessing Elements
+  - [x] Insert
+  - [x] Delete
+  - [x] Getting Length
   - [ ] (Optional) Slicing of array
-  - [ ] Accessing elements using for loop
+  - [x] Accessing elements using for loop
   - [ ] 2D Arrays
 - [ ] [Characters and ASCII Code](https://www.ascii-code.com/). No need to remember the full table, just remember the following
 
@@ -43,8 +43,8 @@
 
 - [ ] Character to ASCII and ASCII to Character conversion
 - [ ] Strings
-  - [ ] Creation
-  - [ ] Displaying
+  - [x] Creation
+  - [x] Displaying
   - [ ] Checking whether strings can be modified or not (specific to each programming language)
 - [ ] String Operations
   - [x] String Length
@@ -63,10 +63,10 @@
   - [ ] Call by value and call by reference
   - [ ] Pointers (mostly used in C and Java)
 - [ ] Object Oriented Programming (OOPS)
-  - [ ] Creation of classes
+  - [x] Creation of classes
   - [x] Constructors
   - [x] Inhertiance
-  - [ ] Abstraction
+  - [x] Abstraction
   - [x] Overloaded functions
   - [x] Overriding Functions
   - [x] Polymorphism

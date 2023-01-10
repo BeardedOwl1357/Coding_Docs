@@ -40,11 +40,13 @@ Do not read this in one go. This is just for referencing purposes
   - [Polymorphism](#polymorphism)
     - [Typecasting](#typecasting)
     - [instanceOf](#instanceof)
-  - [Wrapper Classes](#wrapper-classes)
+  - [Abstraction](#abstraction)
+  - [TODO : Interfaces](#todo--interfaces)
   - [OOPS RULES](#oops-rules)
     - [Inheritance](#inheritance-1)
     - [Overriding and Overloading Inherited Methods](#overriding-and-overloading-inherited-methods-1)
     - [Polymorphism](#polymorphism-1)
+    - [Abstraction](#abstraction-1)
 - [Arrays](#arrays)
   - [Variable Arguments](#variable-arguments)
 - [TODO : String Operations](#todo--string-operations)
@@ -53,7 +55,19 @@ Do not read this in one go. This is just for referencing purposes
   - [Reverse](#reverse)
   - [Comparison](#comparison)
   - [Multiline Strings (Codeblocks)](#multiline-strings-codeblocks)
-- [Useful Tutorials](#useful-tutorials)
+- [Data Structures](#data-structures)
+  - [Wrapper Classes](#wrapper-classes)
+    - [Autoboxing and Unboxing](#autoboxing-and-unboxing)
+  - [Collections](#collections)
+  - [Implemented Data Structures](#implemented-data-structures)
+  - [Set](#set)
+  - [List](#list)
+  - [List](#list-1)
+  - [Stack](#stack)
+- [Miscellaneous](#miscellaneous)
+  - [Tutorials](#tutorials)
+  - [Math Library](#math-library)
+  - [Getting The Datatype of an object](#getting-the-datatype-of-an-object)
 
 # Progress
 
@@ -875,9 +889,91 @@ public class Main{
 }
 ```
 
-## Wrapper Classes
+## Abstraction
 
-- They are object representation of primitive data types
+- Abstraction is a "true blueprint"
+
+  - It is used as a building block
+  - Only serves to be inherited by other classes
+  - Cannot be used to create any object
+  - Useful for defining the "base" outline
+
+- Abstract classes and methods are templates that are meant to be implemented by their subclasses
+- Classes and methods are declared abstract by using the abstract reserved word
+- If a subclass inherits from an abstract class, it must implement its abstract methods or the class itself must be declared as abstract
+- Abstract classes cannot be instantiated
+- Classes and methods are defined as abstract by using the word "abstract"
+  - If a class has an abstract method, then the class must be declared as abstract
+
+```java
+// Animal.java
+package animals;
+
+public abstract class Animal{
+    public abstract void greet();
+    public abstract void eat();
+    public void stateSpecies(){
+        System.out.println("I am an animal by species");
+    }
+}
+```
+
+```java
+// Dog.java
+package animals;
+
+public class Dog extends Animal{
+    public void greet() {
+        System.out.println("I am a dog");
+    }
+
+    @Override
+    public void eat(){
+        System.out.println("Dog eats");
+    }
+
+}
+```
+
+```java
+// Cat.java
+package animals;
+
+public class Cat extends Animal{
+    public void greet(){
+        System.out.println("I am a Cat");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Cat eats");
+    }
+}
+```
+
+```java
+// Main.java
+import animals.*;
+public class Main{
+    public static void main(String args[]){
+        Animal d = new Dog();
+        Animal c = new Cat();
+        // Dog
+        d.greet();
+        d.eat();
+        d.stateSpecies();
+        // Cat
+        c.greet();
+        c.eat();
+        c.stateSpecies();
+    }
+
+}
+```
+
+## TODO : Interfaces
+
+[ELI5 of interfaces](https://www.reddit.com/r/explainlikeimfive/comments/1v4i2y/comment/ceom6b1/?utm_source=share&utm_medium=web2x&context=3)
 
 ## OOPS RULES
 
@@ -909,6 +1005,15 @@ public class Main{
 
 - An object can have a superclass type and subclass instance
 - If a method is overridden by subclass, then the polymorphic object will execute the overridden method at runtime
+
+### Abstraction
+
+- Abstract classes and methods are templates that are meant to be implemented by their subclasses
+- Classes and methods are declared abstract by using the abstract reserved word
+- If a subclass inherits from an abstract class, it must implement its abstract methods or the class itself must be declared as abstract
+- Abstract classes cannot be instantiated
+- Classes and methods are defined as abstract by using the word "abstract"
+  - If a class has an abstract method, then the class must be declared as abstract
 
 # Arrays
 
@@ -1027,7 +1132,242 @@ public class App{
 }
 ```
 
-# Useful Tutorials
+# Data Structures
+
+## Wrapper Classes
+
+- They are object representation of primitive data types
+  - Basic primitive types on steroids
+- The objects of wrapper classes are called "reference datatypes"
+- "String" is a wrapper class
+- Wrapper class provides additional methods and functionality over primitives BUT they are slower to access than primitives
+
+| Primitive Datatype | Reference Datatype |
+| ------------------ | ------------------ |
+| int                | Integer            |
+| double             | Double             |
+| char               | Character          |
+| boolean            | Boolean            |
+
+### Autoboxing and Unboxing
+
+- A primitive datatype can be converted to wrapper automatically. This is called autoboxing
+- Similarly, a reference datatype can be converted into primitive automatically. This is called unboxing.
+
+## Collections
+
+- A collection is an interface using which other interfaces are built up
+- The following data structure interfaces (Collection) build over the collection interface
+
+| Collection        | Quirk                                               |
+| ----------------- | --------------------------------------------------- |
+| Set               | Unordered unique elements                           |
+| List              | Ordered elements, randomly or sequentially accessed |
+| Queue and Dequeue | FIFO type data structure                            |
+| Map               | Key-Value pair based access                         |
+
+## Implemented Data Structures
+
+- List of data structures which have been implemented for collection
+- [This is how the collections "tree" look like](https://static.javatpoint.com/images/java-collection-hierarchy.png)
+  - "Implements" mean that the "interface" was used to create the class
+  - "Extends" mean that the class inherited from other class
+
+| Collection        | Data Structure                                        |
+| ----------------- | ----------------------------------------------------- |
+| Set               | HashedSet, TreeSet, LinkedHashSet                     |
+| List              | ArrayList, Vector                                     |
+| Queue and Dequeue | Queue, LinkedList, Dequeue, PriorityQueue, ArrayDeque |
+| Map               | HashMap, TreeMap, EnumMap                             |
+| Stack             | Stack                                                 |
+
+## Set
+
+**Common Methods**
+
+| Method             | Function                                     |
+| ------------------ | -------------------------------------------- |
+| add(`<data>`)      | Inserts `<data>` into set                    |
+| remove(`<data>`)   | Removes `<data>` from set                    |
+| contains(`<data>`) | Checks whether `<data>` exists in set or not |
+| size()             | Gets number of elements inside the set       |
+
+```java
+// To import all data structures at once
+// import java.util.*
+
+import java.util.Set;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.TreeSet;
+public class Main{
+    public static void main(String args[]) {
+        // HashSet
+        Set hs = new HashSet(); // Does not maintain the order
+        hs.add("x"); hs.add("y"); hs.add(5); // No problem with different datatypes
+        System.out.println(hs);
+
+        // LinkedHashSet
+        hs = new LinkedHashSet(); // Maintains order of insertion
+        hs.add("x"); hs.add("y"); hs.add(5); // No problem with different datatypes
+        System.out.println(hs);
+
+        // TreeSet
+        hs = new TreeSet(); // Ascending Order.
+        hs.add(15); hs.add(2); hs.add(5); // Must contain same datatype
+        System.out.println(hs);
+    }
+}
+```
+
+## List
+
+**Common Methods**
+
+| Method                  | Function                                                                |
+| ----------------------- | ----------------------------------------------------------------------- |
+| add(`<data>`)           | Inserts `<data>` into list                                              |
+| remove(`<data>`)        | Removes `<data>` from list                                              |
+| remove(`<index>`)       | Removes data at `<index>` from list                                     |
+| get()                   | Checks whether `<data>` exists in set or not                            |
+| set(`<index>`,`<data>`) | Changes value of data at `<index>` to `<data>`                          |
+| indexOf(`<data>`)       | Returns index of first occurrence of `<data>`. If not found, returns -1 |
+| lastIndexOf(`<data>`)   | Returns index of last occurrence of `<data>`. If not found, returns -1  |
+
+```java
+// To import all data structures at once
+// import java.util.*
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.LinkedList;
+public class Main{
+    public static void main(String args[]) {
+        /* ArrayList is better than Vector */
+        List l = new ArrayList();
+        // Multiple datatypes can be used
+        l.add(1); l.add(2); l.add("x");
+        System.out.println(l);
+
+        // Random Access
+        for(int i = 0; i < l.size(); ++i){
+            System.out.print(l.get(i) + " ");
+        }
+        System.out.println();
+
+        // Setting data
+        System.out.println(l);
+        l.set(1,48);
+        System.out.println(l);
+
+        // Removing element
+        l.remove(l.size() - 1);
+        System.out.println(l);
+        l.add("x");
+        System.out.println(l);
+        l.remove("x"); // Removes first occurence of "x"
+        System.out.println(l);
+
+        // Getting index of First and Last Occurence of a duplicate element
+        l.add(1);
+        System.out.println("First Occurrence " + l.indexOf(1));
+        System.out.println("Last Occurrence " + l.lastIndexOf(1));
+        // If not found, returns -1
+        System.out.println("First Occurrence " + l.indexOf(6));
+    }
+}
+```
+
+## List
+
+**Common Methods**
+
+| Method        | Function                                                        |
+| ------------- | --------------------------------------------------------------- |
+| add(`<data>`) | Inserts `<data>` into queue                                     |
+| remove()      | Removes the "head" / "top" of queue. Returns the removed object |
+| peek()        | Gets the "head" / "top" of the queue                            |
+
+- By default, Priority Queue is a minqueue
+  - To use as a max queue, insert `-1 * element`.
+  - To practically use the element of max queue, use absoulte value
+
+```java
+// To import all data structures at once
+// import java.util.*
+
+import java.util.Queue;
+import java.util.PriorityQueue;
+import java.util.LinkedList;
+public class Main{
+    public static void main(String args[]) {
+        Queue q = new LinkedList();
+        // Insertion. Multiple datatypes allowed
+        q.add(1); q.add(2); q.add("x");
+        System.out.println(q);
+
+        // Removal : Only head (first element) gets removed
+        System.out.println(q);
+        q.remove();
+        System.out.println(q);
+
+        // Getting head / top.
+        System.out.println("Head is " + q.peek());
+
+        /* Priority Queue : Min Queue by default */
+        Queue pq = new PriorityQueue();
+        // Multiple datatypes are not allowed
+        pq.add(3); pq.add(2); pq.add(5);
+        System.out.println(pq);
+
+        // Removal : Only head (first element) gets removed
+        System.out.println(pq);
+        pq.remove();
+        System.out.println(pq);
+
+        // Getting head / top.
+        System.out.println("Head is " + pq.peek());
+
+        /* Using priority queue as maxQueue */
+        pq.clear();
+        pq.add(-2); pq.add(-5); pq.add(-3);
+        System.out.println(pq); // -5 is at head. For max queue, use absolute value
+
+    }
+}
+```
+
+## Stack
+
+- It is created by extending the `Vector` class
+
+```java
+// To import all data structures at once
+// import java.util.*
+
+import java.util.Stack;
+public class Main{
+    public static void main(String args[]) {
+
+        /* Stack */
+        Stack s = new Stack();
+        s.add(5); s.add(4); s.add("x");
+        System.out.println(s);
+
+        // Removal : LIFO
+        s.pop();
+        System.out.println(s);
+
+        // Getting top
+        System.out.println("Top is " + s.peek());
+    }
+}
+```
+
+# Miscellaneous
+
+## Tutorials
 
 - [Java printf 🖨️](https://www.youtube.com/watch?v=c2B_Av3x65s)
 - [How to Run Java Program in Visual Studio Code | VS Code Java](https://www.youtube.com/watch?v=KiDwLEikUho)
@@ -1035,6 +1375,40 @@ public class App{
 - [Packages in Java](https://youtu.be/k7TwStbkK70)
 - [Java Tutorial: Creating Packages in Java](https://youtu.be/av816KIz8nM)
 
+## Math Library
+
+## Getting The Datatype of an object
+
+```java
+import java.lang.Math;
+
+public class Main{
+    public static void main(String args[]){
+        System.out.println(Math.abs(-5)); // Absolute value
+        System.out.println(Math.floor(3.5)); // Floor
+        System.out.println(Math.ceil(3.5)); // Ceil
+        System.out.println(Math.round(3.6)); // Round
+        System.out.println(Math.round(3.4)); // Round
+    }
+}
 ```
 
+```java
+public class Main{
+    public static void main(String args[]){
+        Object a = 5;
+        Object b = 5.0;
+        Object c = "5";
+        Object d = false;
+        Object[] x = {a,b,c,d};
+        for(Object obj : x)
+            System.out.println(obj.getClass().getSimpleName());
+        System.out.println("---------------");
+        // Checking by Typecasting as Object
+        int l = 65;
+        // We are casting the "l" object into an "Object" class. Every datatype is derived from Object class
+        String type = ((Object)l).getClass().getSimpleName();
+        System.out.println(type);
+    }
+}
 ```
