@@ -59,7 +59,7 @@
 - [ ] Functions
   - [x] Creation
   - [x] Usage
-  - [ ] Lambda function (optional)
+  - [x] Lambda function (optional)
   - [ ] Call by value and call by reference
   - [ ] Pointers (mostly used in C and Java)
 - [ ] Object Oriented Programming (OOPS)
@@ -73,7 +73,7 @@
   - [ ] (optional) Overloading operators
   - [x] How to create an instance / object of a class
 - [ ] File Handling
-  - [ ] Opening a file
-  - [ ] Reading from a file
-  - [ ] Writing to a file
-  - [ ] Appending to a file
+  - [x] Opening a file
+  - [x] Reading from a file
+  - [x] Writing to a file
+  - [x] Appending to a file

@@ -18,6 +18,12 @@
   - [npm Cache](#npm-cache)
   - [TODO : Scripting in NPM and NPX](#todo--scripting-in-npm-and-npx)
   - [List of commands](#list-of-commands)
+- [Express](#express)
+  - [Middlewares](#middlewares)
+  - [Routes](#routes)
+    - [RootPath : A helper module](#rootpath--a-helper-module)
+    - [TODO : Using routes/ and Router](#todo--using-routes-and-router)
+    - [Adding a 404 Page / Route](#adding-a-404-page--route)
 - [Miscellaneous Things](#miscellaneous-things)
   - [Multiline Strings](#multiline-strings)
   - [Important Videos to Watch](#important-videos-to-watch)
@@ -426,6 +432,112 @@ npx animal-talk -t "hello" -a "bird"
   - Windows :%AppData%\npm\node_modules
   - Linux :/usr/local/lib/node_modules OR/usr/local/lib/node
   - NOTE : In linux, installing global packages might pose a problem due to read and write restrictions. Refer to internet on how to solve it
+
+# Express
+
+## Middlewares
+
+- Between every request (initiated by user) and every response (provided by the server), some functions are executed
+- These functions are called middlewares
+- Every middleware is composed of three things
+  - req : An object which contains information provided by the client while initiating the request
+  - res : An object by which we can send a response to the client
+  - next : The "next" function which will be executed after the middleware has been executed
+- To use a middleware, the `use()` method is used
+- Check the below example
+
+```js
+const Express = require("express");
+
+const app = Express();
+
+// Custom Middleware
+function m1(req, res, next) {
+  console.log("This is middleware 1");
+  next();
+}
+
+function m2(req, res, next) {
+  console.log("This is middleware 2");
+  next();
+}
+
+// Using Middlewares
+/* Middleware execute from top to bottom */
+app.use(m2); // Executed first
+app.use(m1); // Executed second
+
+// A route for testing
+app.get("/", (req, res) => {
+  res.send("<h1>The middlewares have been executed. Check console</h1>");
+});
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is active at http://localhost:${port}`);
+});
+```
+
+## Routes
+
+### RootPath : A helper module
+
+- We will need to import routes and other files from different directories
+- We will make a helper module which will provide us with the "root" path
+  - Root path is defined as the path where the main application (server) has executed from
+  - Taking root path as reference, we can navigate to different directories
+- By convention, helper modules are put in the `util/` folder
+
+```js
+// util/rootPath.js : This is the module
+const path = require("path");
+
+const mainFile = require.main.filename;
+const rootPath = path.dirname(mainFile);
+
+module.exports = rootPath;
+```
+
+```js
+// index.js : This file is the main file. This file will be executed
+const rootPath = require("./util/rootPath");
+const path = require("path");
+
+console.log(rootPath);
+console.log(`Absolute path of util/ = ${path.join(rootPath, "util")}`);
+```
+
+### TODO : Using routes/ and Router
+
+### Adding a 404 Page / Route
+
+- Just add a middleware at the end
+  - This middleware will be executed when a route is entered which does not exist
+  - Each route will be checked sequentially and if the route is not found, this will be executed
+
+```js
+// index.js
+const Express = require("express");
+const AdminRoute = require("./routes/admin");
+
+const app = Express();
+
+// Middleware
+app.use(Express.json());
+
+// Routes
+app.use("/admin", AdminRoute);
+
+// 404 Page
+app.use("/", (req, res) => {
+  res.status(404).send("<h1> This page does not exist </h1>");
+});
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is active at http://localhost:${port}`);
+});
+```
 
 # Miscellaneous Things
 

@@ -29,7 +29,7 @@ Do not read this in one go. This is just for referencing purposes
   - [Basics](#basics-1)
   - [Variable Scope](#variable-scope)
   - [Function Overloading](#function-overloading)
-- [TODO : OOPS (Object Oriented Programing Systems)](#todo--oops-object-oriented-programing-systems)
+- [OOPS (Object Oriented Programing Systems)](#oops-object-oriented-programing-systems)
   - [Packages](#packages)
   - [Creation of Classes](#creation-of-classes)
   - [Constructors](#constructors)
@@ -48,13 +48,17 @@ Do not read this in one go. This is just for referencing purposes
     - [Polymorphism](#polymorphism-1)
     - [Abstraction](#abstraction-1)
 - [Arrays](#arrays)
+  - [Array Operations](#array-operations)
+  - [Sorting Arrays](#sorting-arrays)
   - [Variable Arguments](#variable-arguments)
 - [TODO : String Operations](#todo--string-operations)
-  - [Length of string](#length-of-string)
-  - [Splitting in words](#splitting-in-words)
-  - [Reverse](#reverse)
-  - [Comparison](#comparison)
+  - [Summarised](#summarised)
+  - [Interning and String Comparison](#interning-and-string-comparison)
   - [Multiline Strings (Codeblocks)](#multiline-strings-codeblocks)
+  - [StringBuilder : String on Steroids](#stringbuilder--string-on-steroids)
+  - [Performance Comparison Between String and StringBuilder](#performance-comparison-between-string-and-stringbuilder)
+  - [Printing all substrings of a string](#printing-all-substrings-of-a-string)
+  - [Toggling case of each character in a String](#toggling-case-of-each-character-in-a-string)
 - [Data Structures](#data-structures)
   - [Wrapper Classes](#wrapper-classes)
     - [Autoboxing and Unboxing](#autoboxing-and-unboxing)
@@ -64,10 +68,26 @@ Do not read this in one go. This is just for referencing purposes
   - [List](#list)
   - [List](#list-1)
   - [Stack](#stack)
+  - [Maps](#maps)
+  - [Iterating Over Collection Objects](#iterating-over-collection-objects)
+  - [Iterating Over Map Object\*](#iterating-over-map-object)
+- [Collections Object](#collections-object)
+  - [Sorting and Reversing](#sorting-and-reversing)
+- [Exception Handling and File Handling](#exception-handling-and-file-handling)
+  - [Exception Handling](#exception-handling)
+    - [Basic Try-Catch](#basic-try-catch)
+    - [Handling Exceptions](#handling-exceptions)
+    - [Finally](#finally)
+    - [Creating and Throwing Custom Exceptions](#creating-and-throwing-custom-exceptions)
+  - [File Handling](#file-handling)
+    - [Reading](#reading)
+    - [Writing](#writing)
+    - [Appending](#appending)
 - [Miscellaneous](#miscellaneous)
   - [Tutorials](#tutorials)
   - [Math Library](#math-library)
   - [Getting The Datatype of an object](#getting-the-datatype-of-an-object)
+  - [ASCII And Character to Int](#ascii-and-character-to-int)
 
 # Progress
 
@@ -506,7 +526,7 @@ public class App{
 }
 ```
 
-# TODO : OOPS (Object Oriented Programing Systems)
+# OOPS (Object Oriented Programing Systems)
 
 ## Packages
 
@@ -1037,6 +1057,62 @@ public class App{
 }
 ```
 
+## Array Operations
+
+- This is a primitve array
+- Better alternatives such as ArrayList are available in [Collections](#data-structures)
+
+```java
+import java.util.*;
+public class Main{
+
+    public static void main(String args[]) {
+        /* Array Operations */
+        double[] arr = new double[3];
+        // Default values are 0
+        printArray(arr);
+        // New values cannot be inserted
+        // Changing values
+        arr[0] = 5.0;
+        arr[1] = 48;
+        printArray(arr);
+    }
+
+    // Printing arrays
+    public static void printArray(double[] arr){
+        for(double d : arr)
+            System.out.print(d + " ");
+        System.out.println();
+    }
+
+}
+```
+
+## Sorting Arrays
+
+- They are done using the `Arrays.sort()` method from `java.util.Arrays`
+
+```java
+import java.util.Arrays;
+public class Main{
+
+    public static void main(String args[]) {
+        double[] arr = {15.0,157.0,8.0,1.0,8.5};
+        printArray(arr);
+        Arrays.sort(arr);
+        printArray(arr);
+    }
+
+    // Printing arrays
+    public static void printArray(double[] arr){
+        for(double d : arr)
+            System.out.print(d + " ");
+        System.out.println();
+    }
+
+}
+```
+
 ## Variable Arguments
 
 - Allows a function to have various parameters of the same data type
@@ -1066,55 +1142,87 @@ public class App{
 
 # TODO : String Operations
 
-## Length of string
+## Summarised
+
+**Strings are immutable** : Their value cannot be changed.
+
+[String and StringBuilder in java Playlist (Hindi) ](https://www.youtube.com/watch?v=4ZOV3PYe0y0&list=PL-Jc9J83PIiFIKbdCKuYwsV8KaX-jHe0V)
+
+| Method                       | Function                                                       |
+| ---------------------------- | -------------------------------------------------------------- |
+| length()                     | Gets length of string                                          |
+| charAt(`<index>`)            | Gets the character at `<index>` of string                      |
+| split(`<term>`)              | Splits string into array on `<term>`                           |
+| substring(`<start>`,`<end>`) | Returns a substring from `<start>` index to `<end>-1` index    |
+| substring(`<start>`)         | Returns a substring from `<start>` index to `length()-1` index |
+| equals(`<s2>`)               | Compares the string with `<s2>`                                |
+| equalsIgnoreCase(`<s2>`)     | Compares the string with `<s2>`, ignoring case                 |
+
+NOTE:
+
+The methods are demonstrated as follows
 
 ```java
-public class App{
+/* (Hindi Tutorial)
+    * https://www.youtube.com/watch?v=4ZOV3PYe0y0&list=PL-Jc9J83PIiFIKbdCKuYwsV8KaX-jHe0V
+*/
+public class Main{
     public static void main(String args[]){
-        String x = new String("lmao");
-        System.out.println("Length of string = " + x.length());
-    }
-}
-```
+        String x = "This Is Sparta";
+        /*  Char  : | T | h | i | s |   | i | s |   | S | p | a  | r  | t  | a  |
+            Index : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+         */
+        System.out.println("Length = " + x.length()); // Returns length of string
 
-## Splitting in words
+        System.out.println(x.charAt(0)); // Returns character at 0th position
 
-```java
-public class App{
-    public static void main(String args[]){
-        String x = new String("This string has many words");
-        String words[] = x.split(" ");
-        for(String word : words)
-            System.out.print(word + " ");
+        System.out.println(x.substring(1,4)); // "his" will be printed
+
+        System.out.println(x.substring(5)); // "Is Sparta" will be printed
+
+        String[] res = x.split(" "); // Splits String based on " ". Result is an array
+        for(String s : res)
+            System.out.print(s + " ");
         System.out.println();
+
+        /* Interning and String Comparison
+            * All the three strings below have the same value
+            * However, one is created using the "new" keyword
+            * == operator compares Strings on the basis of "address".
+            * s1 and s2 point to the same address where the word "hello" is stored
+            * However, s3 (due to dynamically allocated using "new" keyword) is pointing to different memory
+            * Therefore, s1 == s3 is false, s2 == s3 is false BUT s1 == s2 is true
+            * To compare strings, use equals() and equalsIgnoreCase()
+         */
+        String s1 = "hello";
+        String s2 = "hello";
+        String s3 = new String("hello");
+        String temp = String.format("%b %b %b",s1 == s2 , s2 == s3 ,s1 == s3);
+        System.out.println(temp);
+        temp = String.format("%b %b %b",s1.equals(s2) , s2.equals(s3) ,s1.equals(s3));
+        System.out.println(temp);
     }
 }
 ```
 
-## Reverse
+## Interning and String Comparison
+
+- All the three strings below have the same value
+- However, one is created using the "new" keyword
+- == operator compares Strings on the basis of "address".
+- s1 and s2 point to the same address where the word "hello" is stored
+- However, s3 (due to dynamically allocated using "new" keyword) is pointing to different memory
+- Therefore, s1 == s3 is false, s2 == s3 is false BUT s1 == s2 is true
+- To compare strings, use equals() and equalsIgnoreCase()
 
 ```java
-public class App{
-    public static void main(String args[]){
-        String s = "This is weird";
-        StringBuilder sb = new StringBuilder(s);
-        sb.reverse();
-        System.out.println(sb);
-    }
-}
-```
-
-## Comparison
-
-```java
-public class App{
-    public static void main(String args[]){
-        String s1 = "Hello world";
-        String s2 = "hello world";
-        System.out.println(s1.equals(s2)); // Checks case
-        System.out.println(s1.equalsIgnoreCase(s2)); // Ignores Case
-    }
-}
+String s1 = "hello";
+String s2 = "hello";
+String s3 = new String("hello");
+String temp = String.format("%b %b %b",s1 == s2 , s2 == s3 ,s1 == s3);
+System.out.println(temp);
+temp = String.format("%b %b %b",s1.equals(s2) , s2.equals(s3) ,s1.equals(s3));
+System.out.println(temp);
 ```
 
 ## Multiline Strings (Codeblocks)
@@ -1129,6 +1237,140 @@ public class App{
                 """;
         System.out.println(x);
     }
+}
+```
+
+## StringBuilder : String on Steroids
+
+- High performance as compared to strings
+- Allows the ability to treat string as mutable objects
+  - Can append
+  - Can remove
+  - Can modify
+
+| Method                   | Function                                              |
+| ------------------------ | ----------------------------------------------------- |
+| length()                 | Gets length                                           |
+| append(`<char>`)         | Appends `<char>` at end of string                     |
+| charAt(`<i>`)            | Gets character at index `<i>`                         |
+| setCharAt(`<i>`,`<val>`) | Sets the value of character at index `<i>` to `<val>` |
+| delteCharAt(`<i>`)       | Deletes character at index `<i>`                      |
+| insert(`<i>`,`<val>`)    | Inserts `<val>` at `<i>` index                        |
+| append(`<val>`)          | Inserts `<val>` at end of string                      |
+
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String args[]){
+        /*  Char  : | T | h | i | s |   | i | s |   | S | p | a  | r  | t  | a  |
+            Index : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+         */
+        StringBuilder sb = new StringBuilder("This is Sparta");
+        System.out.println(sb); // Prints string
+        System.out.println(sb.length()); // Prints length of string
+        System.out.println(sb.charAt(0)); // Character at 0th index
+        sb.setCharAt(1,'R'); // Setting value at 1st index to 'R'
+        System.out.println(sb);
+
+        sb.deleteCharAt(1); // Deleting character at 1st index
+        System.out.println(sb);
+
+        sb.insert(1,'H'); // Inserts 'H' at 1st index
+        System.out.println(sb);
+
+        sb.append('g'); // Inserts 'g' at end of string
+        System.out.println(sb);
+
+    }
+}
+```
+
+## Performance Comparison Between String and StringBuilder
+
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String args[]){
+        int n = 100000; // 10^5
+        String s = "";
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < n; ++i)
+            s += 'x';
+        long end = System.currentTimeMillis();
+        System.out.println("String. Time taken = " + (end-start) + " ms");
+        // StringBuilder
+        StringBuilder sb = new StringBuilder("");
+        start = System.currentTimeMillis();
+        for(int i = 0; i < n; ++i)
+            sb.append('x');
+        end = System.currentTimeMillis();
+        System.out.println("StringBuilder. Time taken = " + (end-start) + " ms");
+
+        /* Output
+        *   String. Time taken = 872 ms
+        *   StringBuilder. Time taken = 2-3 ms
+        * */
+    }
+}
+```
+
+- This difference is because of immutability of strings
+
+  - Each time when a new character is "added" to the string, a new string is produced
+  - This string is generated as follows
+    - Copy all characters of the string
+    - Add new character
+    - Assign this to the variable
+  - Thus, "adding" to a string is O(n^2) operation
+
+- However, with StringBuilders, the character is appended at the end of the string
+  - No copy operation
+  - Thus, an O(1) operation
+
+## Printing all substrings of a string
+
+```java
+public class Main{
+    public static void main(String args[]){
+        // Printing all substrings of a string
+        String y = "abcd";
+        for(int i = 0; i < y.length(); ++i)
+        {
+            for(int j = i+1; j <= y.length(); ++j)
+                System.out.print(y.substring(i,j) + " ");
+            System.out.println();
+        }
+    }
+}
+```
+
+## Toggling case of each character in a String
+
+```java
+import java.util.*;
+public class Main{
+    // Whatever Exception a method can throw, needs to be declared in the function signature
+
+    public static void main(String args[]) {
+        String s = new String("aaaBBccCDDaeeFf");
+        System.out.println(test(s));
+    }
+
+    public static String test(String s){
+        int n = s.length();
+        StringBuilder ans = new StringBuilder(s);
+        for(int i = 0; i < n; ++i){
+            char c = s.charAt(i);
+            if(c <= 'Z')
+                ans.setCharAt(i,(char)((c - 'A') + 'a'));
+            else
+                ans.setCharAt(i,(char)((c - 'a') + 'A'));
+        }
+        return ans.toString();
+    }
+
 }
 ```
 
@@ -1365,6 +1607,406 @@ public class Main{
 }
 ```
 
+## Maps
+
+- Originally not a part of the collections framework
+- HashMap : Does not care about order of elements
+- TreeMap : Orders elements in ascending order
+- LinkedHashMap : Retains order of insertion of elements
+
+**Common Methods**
+
+| Method                         | Function                                            |
+| ------------------------------ | --------------------------------------------------- |
+| put(`<key>`,`<value>`)         | Associates `<key>` with `<value>`                   |
+| put(`<key>`,`<value>`)         | Also used to update the value of an existing key    |
+| putIfAbsent(`<key>`,`<value>`) | Inserts `<key> : <value>` if `<key>` does not exist |
+| get(`<key>`)                   | Returns the value assoicated with `<key>`           |
+| remove(`<key>`)                | Removes the `<key>` and value associated with it    |
+| containsKey(`<key>`)           | Checks whether a key exists or not                  |
+| containsValue(`<value>`)       | Checks whether a value exists or not                |
+| entrySet()                     | Converts a set into map. Iterators can then be used |
+| keySet()                       | Returns a set of keys of map                        |
+| value()                        | Returns a set of values of map                      |
+
+```java
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.LinkedHashMap;
+
+public class Main{
+    public static void main(String args[]){
+        /*
+            HashMap : Does not care about order of elements
+            TreeMap : Orders elements in ascending order
+            LinkedHashMap : Retains order of insertion of elements
+         */
+        Map mp = new HashMap();
+        mp.put(5,500); mp.put(2,200); mp.put(3,300);
+        System.out.println(mp);
+
+        // If key does not exist, null is returned
+        System.out.println(mp.get(7));
+
+        // Inserts key,value if key does not exist
+        mp.putIfAbsent(5,400);
+        System.out.println(mp);
+        mp.putIfAbsent(4,400);
+        System.out.println(mp);
+
+        // Updating value of key
+        mp.put(5,999);
+        System.out.println(mp);
+
+        // Removing an element. If element does not exist, it does not raise any error
+        System.out.println("Before removing .. " + mp);
+        mp.remove(8);
+        mp.remove(2);
+        System.out.println("After Removing .. " + mp);
+
+        // Checking whether a key exists or not
+        System.out.println(mp.containsKey(5));
+        System.out.println(mp.containsKey(7));
+        // Checking whether a value exists or not
+        System.out.println(mp.containsValue(200));
+        System.out.println(mp.containsValue(7));
+
+        System.out.println(mp.keySet()); // Returns a set of keys of map
+        System.out.println(mp.values()); // Returns a set of values of map
+
+
+    }
+}
+```
+
+## Iterating Over Collection Objects
+
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String args[]){
+        /* Iterators */
+        ArrayList x = new ArrayList();
+        x.add(5); x.add(7); x.add(8);
+        for(var i = x.iterator(); i.hasNext(); )
+        // i.next() gets the value of current iterator and increments it
+            System.out.print(i.next() + " ");
+        System.out.println();
+
+        /* Enhanced For Loop */
+        ArrayList<Integer> y = new ArrayList<Integer>(); // The "type" cannot be a primitive
+        y.add(51); y.add(156); y.add(89);
+        for(int a : y)
+            System.out.print(a + " ");
+        System.out.println();
+
+        /* Lambda Functions and forEach()
+
+        *  Lambda functions are defined as (p1,p2,p3,..) -> {}
+        *  forEach() iterates over each object of the collection
+
+        */
+        ArrayList z = new ArrayList();
+        z.add(147); z.add(987); z.add(0);
+        z.forEach(value -> {
+            System.out.print(value + " ");
+        });
+    }
+}
+```
+
+## Iterating Over Map Object\*
+
+- Iterators, Enhanced for loops and forEach() does not work on maps
+- Map needs to be converted to entrySet()
+- **forEach() is better in maps**
+
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String args[]){
+        /* Iterators */
+        Map x = new HashMap();
+        x.put(1,100); x.put(5,500); x.put(3,300);
+        var i = x.entrySet().iterator();
+        while(i.hasNext()){
+            var l = i.next();
+            System.out.println(l);
+        }
+
+        /* forEach */
+        x.forEach((key,value) -> {
+            System.out.println(String.format("Key %d : Value %d",key,value));
+        });
+
+    }
+}
+```
+
+# Collections Object
+
+- Importing : `import java.util.Collections`
+- Methods : **FOR METHODS TO WORK, DATA STRUCTURE MUST BE MUTABLE**
+
+| Method                                    | Function                                   |
+| ----------------------------------------- | ------------------------------------------ |
+| sort(`List<>`)                            | Sorts a `List<>` object in ascending order |
+| reverseOrder(`List<>`)                    | Reverses a `List<>` object.                |
+| sort(`List<>`,Collections.reverseOrder()) | Sorts `List<>` in descending order         |
+
+## Sorting and Reversing
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Main{
+    public static void main(String args[]){
+        // The list object must be mutable
+        List<Integer> arr = new ArrayList<>();
+        arr.add(156); arr.add(16); arr.add(56); arr.add(6); arr.add(65); arr.add(651);
+
+        // Ascending Order
+        System.out.println("Before sorting (Ascending) " + arr);
+        Collections.sort(arr);
+        System.out.println("After sorting (Ascending) " + arr);
+
+        arr.clear();
+        System.out.println();
+
+        // Descending Order
+        arr.add(156); arr.add(16); arr.add(56); arr.add(6); arr.add(65); arr.add(651);
+        System.out.println("Before sorting (Descending) " + arr);
+        Collections.sort(arr,Collections.reverseOrder());
+        System.out.println("After sorting (Descending) " + arr);
+
+        arr.clear();
+        System.out.println();
+
+        // Reversing a list
+        arr.add(156); arr.add(16); arr.add(56); arr.add(6); arr.add(65); arr.add(651);
+        System.out.println("Before Reversing " + arr);
+        Collections.reverse(arr);
+        System.out.println("After Reversing " + arr);
+    }
+}
+```
+
+# Exception Handling and File Handling
+
+## Exception Handling
+
+### Basic Try-Catch
+
+- Whatever statement we think might cause an exception (error) must be executed within a "try" block
+- If any exception (error) is thrown, then it can be "catched" (A code which executes when an error is encountered)
+- See the following piece of code
+
+```java
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter two integers");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        /* The division operation can cause error if b = 0 */
+        try{
+        int c = a/b;
+        System.out.printf("%d / %d = %d ",a,b,c);
+        }catch(Exception e){
+            System.out.println("Error... \n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Handling Exceptions
+
+**Common Methods**
+
+| Method            | Function           |
+| ----------------- | ------------------ |
+| getMessage()      | Get error messsage |
+| printStackTrace() | Prints stack trace |
+
+**Types of Exceptions**
+
+| Type                | Description                                                             |
+| ------------------- | ----------------------------------------------------------------------- |
+| Checked Exception   | Expected exceptions. Methods declare that they might throw an exception |
+| Unchecked Exception | Runtime exceptions. No information known                                |
+
+### Finally
+
+- The code inside the "finally" block executes irrespective of whether an error was caught or not
+- Execute the below code with following inputs
+  - 5 4
+  - 5 0
+
+```java
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter two integers");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        /* The division operation can cause error if b = 0 */
+        try{
+        int c = a/b;
+        System.out.printf("%d / %d = %d \n",a,b,c);
+        }catch(Exception e){
+            System.out.println("Error... \n" + e.getMessage());
+            e.printStackTrace();
+        }finally {
+            System.out.println("PROGRAM FINISHED");
+        }
+    }
+}
+```
+
+### Creating and Throwing Custom Exceptions
+
+- We will extend the `Exception` class to create a `CustomException` class which will throw any error message we provide it
+- It is defined as follows
+
+```java
+// CustomException.java
+package custom;
+
+public class CustomException extends Exception{
+    public CustomException(){
+        this("This is an error");
+    }
+    public CustomException(String message){
+        super(message);
+    }
+
+}
+
+```
+
+```java
+// Main.java
+import custom.CustomException;
+public class Main{
+    // Whatever Exception a method can throw, needs to be declared in the function signature
+    public static void main(String args[]) throws CustomException{
+        int a = 5, b = 0;
+        try{
+            int c = a / b;
+            System.out.println(c);
+        }catch(Exception e){
+            throw new CustomException("Division by 0");
+        }
+    }
+}
+```
+
+## File Handling
+
+- The libraries which are required for file operations are as follows
+
+| Library              | Purpose                                       |
+| -------------------- | --------------------------------------------- |
+| `java.io.File`       | Used for file creation, reading and deletion. |
+| `java.io.FileWriter` | Used for writing and appending purposes       |
+
+**With each file operation, it is recommended to use try-catch blocks to handle the generated exceptions**
+
+Demonstration is as follows
+
+### Reading
+
+```java
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.File; // For reading, creation and deletion
+import java.io.FileWriter; // For writing
+
+public class Main{
+    public static void main(String args[]){
+        // Try-Catch is used for exception handling. Good Practice
+        /* Writing */
+        try{
+            File file = new File("abc.txt");
+            Scanner scanner = new Scanner(file);
+            for(int i = 0; scanner.hasNextLine(); ++i)
+                // %02d means "padded to 2 digits"
+                System.out.printf("Line %02d \t\t %s\n",i,scanner.nextLine());
+            scanner.close();
+        }catch(IOException e){
+            System.out.println("Error in file operations");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Writing
+
+```java
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.File; // For reading, creation and deletion
+import java.io.FileWriter; // For writing
+public class Main {
+    public static void main(String args[]) {
+        // Try-Catch is used for exception handling. Good Practice
+
+        /* Writing */
+        try {
+            FileWriter fileWriter = new FileWriter("abc.txt");
+            // If a file does not exist, it creates it for writing
+            fileWriter.write("This is good \n"); // Does not add "\n" by default
+            fileWriter.write("This is bad \n"); // Does not add "\n" by default
+            fileWriter.write("This is nice \n"); // Does not add "\n" by default
+            fileWriter.write("This is rice \n"); // Does not add "\n" by default
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error in Writing");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Appending
+
+```java
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.File; // For reading, creation and deletion
+import java.io.FileWriter; // For writing
+public class Main{
+    public static void main(String args[]){
+        // Try-Catch is used for exception handling. Good Practice
+
+        /* Appending */
+        try{
+            // The second parameter in FileWriter is for "append"
+            FileWriter fileWriter = new FileWriter("abc.txt",true);
+            fileWriter.write("\n ------------------------- \n");
+            fileWriter.write("This is appended stuff \n");
+            fileWriter.write("This is appended stuff \n");
+            fileWriter.write("This is appended stuff \n");
+            fileWriter.close();
+        }catch(IOException e){
+            System.out.println("Error in appending file");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
 # Miscellaneous
 
 ## Tutorials
@@ -1377,8 +2019,6 @@ public class Main{
 
 ## Math Library
 
-## Getting The Datatype of an object
-
 ```java
 import java.lang.Math;
 
@@ -1389,9 +2029,13 @@ public class Main{
         System.out.println(Math.ceil(3.5)); // Ceil
         System.out.println(Math.round(3.6)); // Round
         System.out.println(Math.round(3.4)); // Round
+        System.out.println("Max Value = " + Math.max(5,9)); // Max
+        System.out.println("Min Value = " + Math.min(5,9)); // Min
     }
 }
 ```
+
+## Getting The Datatype of an object
 
 ```java
 public class Main{
@@ -1409,6 +2053,18 @@ public class Main{
         // We are casting the "l" object into an "Object" class. Every datatype is derived from Object class
         String type = ((Object)l).getClass().getSimpleName();
         System.out.println(type);
+    }
+}
+```
+
+## ASCII And Character to Int
+
+```java
+public class Main{
+    public static void main(String args[]){
+        // NOTE : " (double quotes) means string, ' (single quote) means characters
+        System.out.println((int)'A'); // Prints 65
+        System.out.println((char)65); // Prints "A"
     }
 }
 ```
