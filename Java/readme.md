@@ -1616,18 +1616,18 @@ public class Main{
 
 **Common Methods**
 
-| Method                         | Function                                            |
-| ------------------------------ | --------------------------------------------------- |
-| put(`<key>`,`<value>`)         | Associates `<key>` with `<value>`                   |
-| put(`<key>`,`<value>`)         | Also used to update the value of an existing key    |
-| putIfAbsent(`<key>`,`<value>`) | Inserts `<key> : <value>` if `<key>` does not exist |
-| get(`<key>`)                   | Returns the value assoicated with `<key>`           |
-| remove(`<key>`)                | Removes the `<key>` and value associated with it    |
-| containsKey(`<key>`)           | Checks whether a key exists or not                  |
-| containsValue(`<value>`)       | Checks whether a value exists or not                |
-| entrySet()                     | Converts a set into map. Iterators can then be used |
-| keySet()                       | Returns a set of keys of map                        |
-| value()                        | Returns a set of values of map                      |
+| Method                         | Function                                                            |
+| ------------------------------ | ------------------------------------------------------------------- |
+| put(`<key>`,`<value>`)         | Associates `<key>` with `<value>`                                   |
+| put(`<key>`,`<value>`)         | Also used to update the value of an existing key                    |
+| putIfAbsent(`<key>`,`<value>`) | Inserts `<key> : <value>` if `<key>` does not exist                 |
+| get(`<key>`)                   | Returns value assoicated with `<key>`. If not present, returns null |
+| remove(`<key>`)                | Removes the `<key>` and value associated with it                    |
+| containsKey(`<key>`)           | Checks whether a key exists or not                                  |
+| containsValue(`<value>`)       | Checks whether a value exists or not                                |
+| entrySet()                     | Converts a set into map. Iterators can then be used                 |
+| keySet()                       | Returns a set of keys of map                                        |
+| value()                        | Returns a set of values of map                                      |
 
 ```java
 import java.util.Map;
