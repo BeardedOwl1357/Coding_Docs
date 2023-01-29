@@ -1,4 +1,3 @@
-- [Quick notes about NodeJS](#quick-notes-about-nodejs)
 - [global](#global)
   - [Functions available](#functions-available)
   - [`process` variable](#process-variable)
@@ -27,8 +26,6 @@
 - [Miscellaneous Things](#miscellaneous-things)
   - [Multiline Strings](#multiline-strings)
   - [Important Videos to Watch](#important-videos-to-watch)
-
-# Quick notes about NodeJS
 
 # global
 
@@ -508,6 +505,90 @@ console.log(`Absolute path of util/ = ${path.join(rootPath, "util")}`);
 ```
 
 ### TODO : Using routes/ and Router
+
+- While creating a project, instead of placing all the routes in one file, we can create separate files for a group of routes
+- A group of routes is defined as `/<group_name>/<individual_route>`. For example
+  - /customer/register
+  - /customer/verify
+  - /customer/login
+- As per convention, all routes are stored in a directory called "routes"
+- The steps to create these routes is as follows
+  - Create a file for route
+  - Create an Express Router object
+  - Create the individual routes inside it using the Router object(SEE THE CODE)
+  - Export the routing object to be used by main program
+- An example is defined as follows
+
+```js
+// routes/shop.js
+const Express = require("express");
+const router = Express.Router(); // Creating the Router object
+
+// Creating individual routes
+router.get("/", (req, res) => {
+  res.send("<h1>This is a GET request on the Shop home page</h1>");
+});
+
+router.post("/", (req, res) => {
+  res.send("<h1>This is a POST request on the Shop home page</h1>");
+});
+
+// Export the router
+module.exports = router;
+```
+
+```js
+// routes/admin.js
+const Express = require("express");
+const router = Express.Router(); // Creating the Router object
+// Creating individual routes
+router.get("/", (req, res) => {
+  res.send("<h1>This is a GET request on the admin home page</h1>");
+});
+
+router.post("/", (req, res) => {
+  res.send("<h1>This is a POST request on the admin home page</h1>");
+});
+
+// Export the router
+module.exports = router;
+```
+
+> The exported routes (Router objects) are used as middleware
+> The syntax to use the Router object as middleware is `app.use("/<groupname>",<RouterObject>)`
+
+```js
+// index.js
+/* Modules / packages */
+const Express = require("express");
+const rootPath = require("./util/rootPath");
+const path = require("path");
+/* Routes */
+const AdminRoute = require("./routes/admin");
+const ShopRoute = require("./routes/shop");
+
+console.log(rootPath);
+console.log(`Absolute path of util/ = ${path.join(rootPath, "util")}`);
+
+const app = Express();
+
+// Middleware
+app.use(Express.json());
+
+// Routes
+app.use("/admin", AdminRoute); // All requests by the name of "/admin" will be processed by AdminRoute
+app.use("/shop", ShopRoute); // All requests by the name of "/shop" will be processed by AdminRoute
+
+// 404 Page
+app.use("/", (req, res) => {
+  res.status(404).send("<h1> This page does not exist </h1>");
+});
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is active at http://localhost:${port}`);
+});
+```
 
 ### Adding a 404 Page / Route
 

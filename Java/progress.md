@@ -10,13 +10,18 @@
   - [x] Intermediate Arithmetic (Modulo)
   - [x] Modulo of negative numbers
   - [x] Floating point numbers (floats)
-  - [x] Math Libraries (if any). Math functions like Floor,Ceil,Round etc.
-- [ ] Conditionals (If/Else)
+  - [x] Math Libraries (if any). Math functions like
+    - [x] Floor
+    - [x] Ceil
+    - [x] Round
+    - [x] Abs (Absolute value)
+    - [x] Maximum and Minimum
+- [x] Conditionals (If/Else)
   - [x] Logical Operators (AND,OR,NOT,NOR,XOR)
   - [x] Nested Conditionals
   - [x] Switch Case
 - [x] Operator Precedence
-- [ ] Looping
+- [x] Looping
   - [x] For Loop
   - [x] While Loop
   - [ ] (Optional) Do While loop
@@ -27,13 +32,13 @@
 - [ ] Arrays / Lists (For each datatype)
   - [x] Creation
   - [x] Accessing Elements
-  - [x] Insert
+  - [x] Insert // Cannot happen in normal arrays. Use ArrayList from collections library
   - [x] Delete
   - [x] Getting Length
   - [ ] (Optional) Slicing of array
   - [x] Accessing elements using for loop
   - [ ] 2D Arrays
-- [ ] [Characters and ASCII Code](https://www.ascii-code.com/). No need to remember the full table, just remember the following
+- [x] [Characters and ASCII Code](https://www.ascii-code.com/). No need to remember the full table, just remember the following
 
 ```
 -> Numerical Digits 0-9 (48-57)
@@ -41,11 +46,11 @@
 -> Lower Case Characters (a-z) (97-122)
 ```
 
-- [ ] Character to ASCII and ASCII to Character conversion
+- [x] Character to ASCII and ASCII to Character conversion
 - [ ] Strings
   - [x] Creation
   - [x] Displaying
-  - [ ] Checking whether strings can be modified or not (specific to each programming language)
+  - [x] Checking whether strings can be modified or not (In java, StringBuilder objects can be modified)
 - [ ] String Operations
   - [x] String Length
   - [x] Concatenation
@@ -72,7 +77,7 @@
   - [x] Polymorphism
   - [ ] (optional) Overloading operators
   - [x] How to create an instance / object of a class
-- [ ] File Handling
+- [x] File Handling
   - [x] Opening a file
   - [x] Reading from a file
   - [x] Writing to a file

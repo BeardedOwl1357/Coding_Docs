@@ -1,6 +1,11 @@
 # Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Algorithms](#algorithms)
+  - [Searching](#searching)
+    - [Binary Search](#binary-search)
+      - [Lower Bound](#lower-bound)
+      - [Upper Bound](#upper-bound)
   - [Subarrays](#subarrays)
     - [Prefix Sum](#prefix-sum)
     - [Partial Sum](#partial-sum)
@@ -9,6 +14,87 @@
 
 - This contains common algorithms and their code
 - Written in java
+
+## Searching
+
+### Binary Search
+
+- The playlist to follow : https://www.youtube.com/playlist?list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2
+
+```java
+// This code returns index if the target is found else it returns -1
+    public int binary_search(int arr[], int target){
+        int start = 0, end = arr.length - 1;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == target)
+                return mid;
+            if(arr[mid] > target)
+                end = mid - 1;
+            else
+                start = mid + 1;
+        }
+        return -1; // Element not found
+    }
+```
+
+#### Lower Bound
+
+- Lower Bound is defined as `maximum element which is <= target element`
+- The logic is straightforward
+  - Keep on doing binary search
+  - If target is found, return target
+  - whenever an element less than target is found, store its index and continue the binary search
+- When the binary search gets exhausted, we will have the lower_bound element
+
+```java
+/* Lower Bound = https://youtu.be/5cx0xerA8XY */
+    public int lower_bound(int arr[], int target){
+        int start = 0, end = arr.length - 1;
+        int res = -1;
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            if(arr[mid] == target)
+                return mid;
+            if(arr[mid] < target){
+                res = mid;
+                start = mid + 1;
+            }
+            else
+                end = mid - 1;
+        }
+        return res;
+    }
+```
+
+#### Upper Bound
+
+- Upper Bound is defined as `minimum element which is >= target element`
+- The logic is straightforward
+  - Keep on doing binary search
+  - If target is found, return target
+  - Whenever an element greater than target is found, store its index and continue the binary search
+- When the binary search gets exhausted, we will have the upper_bound element
+
+```java
+    /* Upper Bound = https://youtu.be/uiz0IxPCUeU */
+    public int upper_bound(int arr[],int target){
+        int start = 0, end = arr.length - 1;
+        int res = -1;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == target)
+                return mid;
+            if(arr[mid] > target){
+                res = mid;
+                end = mid - 1;
+            }
+            else
+                start = mid + 1;
+        }
+        return res;
+    }
+```
 
 ## Subarrays
 
