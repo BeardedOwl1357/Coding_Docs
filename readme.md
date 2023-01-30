@@ -11,14 +11,14 @@
 
 # Notes
 
-| Language / Tool                 | Notes Link                                 |
-| ------------------------------- | ------------------------------------------ |
-| NodeJs                          | [Click here to access](NodeJs/readme.md)   |
-| Git                             | [Click here to access](Git/readme.md)      |
-| VSCODE                          | [Click here to access](VSCODE/readme.md)   |
-| Java                            | [Click here to access](Java/readme.md)     |
-| Java DSA                        | [Click here to access](Java/Algorithms.md) |
-| Docker                          | [Click here to access](Docker/readme.md)   |
-| Interesting Github Repositories | [Click here to access](Repo/readme.md)     |
+| Language / Tool                 | Notes Link                                            |
+| ------------------------------- | ----------------------------------------------------- |
+| NodeJs                          | [Click here to access](NodeJs/readme.md)              |
+| Git                             | [Click here to access](Git/readme.md)                 |
+| VSCODE                          | [Click here to access](VSCODE/readme.md)              |
+| Java                            | [Click here to access](Java/readme.md)                |
+| Java DSA                        | [Click here to access](Java/Algorithms/Algorithms.md) |
+| Docker                          | [Click here to access](Docker/readme.md)              |
+| Interesting Github Repositories | [Click here to access](Repo/readme.md)                |
 
 - [==Access Code from here==](https://github.com/BeardedOwl1357/Coding_Docs/blob/main/Java/Algorithms.md)
