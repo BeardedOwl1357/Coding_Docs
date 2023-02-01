@@ -8,9 +8,15 @@
       - [Upper Bound](#upper-bound)
       - [Index of First Occurrence of Element](#index-of-first-occurrence-of-element)
       - [Index of Last Occurrence of Element](#index-of-last-occurrence-of-element)
+      - [Rotated Sorted Array](#rotated-sorted-array)
   - [Subarrays](#subarrays)
     - [Prefix Sum](#prefix-sum)
     - [Partial Sum](#partial-sum)
+- [Miscellaneous Algorithms](#miscellaneous-algorithms)
+  - [Efficient Integer Swapping Algorithm using XOR](#efficient-integer-swapping-algorithm-using-xor)
+  - [Rotating An Array](#rotating-an-array)
+    - [Clockwise Rotation](#clockwise-rotation)
+    - [Anticlockwise Rotation](#anticlockwise-rotation)
 
 # Algorithms
 
@@ -158,6 +164,16 @@ public int last_occurrence_bs(int arr[], int target){
 }
 ```
 
+#### Rotated Sorted Array
+
+- Let us have an original sorted array as `{2,5,7,9,12,15,23,30,45}`
+- Rotations of this sorted array are as follows
+
+| Count | Clockwise                | Anti clockwise           |
+| ----- | ------------------------ | ------------------------ |
+| 0     | {2,5,7,9,12,15,23,30,45} | {2,5,7,9,12,15,23,30,45} |
+| 1     | {45,2,5,7,9,12,15,23,30} | {5,7,9,12,15,23,30,45,2} |
+
 ## Subarrays
 
 ### Prefix Sum
@@ -260,5 +276,122 @@ public class Main{
         System.out.println();
     }
 
+}
+```
+
+# Miscellaneous Algorithms
+
+## Efficient Integer Swapping Algorithm using XOR
+
+- [Source article](https://betterexplained.com/articles/swap-two-variables-using-xor/)
+- The code is as follows
+
+```
+x = x XOR y;
+y = x XOR y; // equivalent to y = (x XOR y) XOR (y) => y = x
+x = x XOR y; // equivalent to x = (x XOR y) XOR (x) => x = y
+```
+
+**DO NOT USE THIS IN PRODUCTION LEVEL CODE AND WITH ANY OTHER DATATYPE**
+
+> Quoting the source article
+
+```
+Would you really use this?
+
+No way. This is a cool trick, but don’t write this as an actual swap function. If you have to debug it in 6 months you’ll be in for some fun. Let me show you why:
+
+Suppose x and y are pointers or references to objects, and both point to the same location. We’d expect our swapping function to just switch the values around, with no net change, right?
+
+Well, take a look at what happens if we expand out line 1:
+x = x xor y
+x = x xor x  // x and y are equal
+x = 0
+Wow! So x becomes 0 right at the get-go. That’s ok by itself, but because x and y are at the same location, we just made y zero as well! We’ve lost the original values, a problem known as aliasing: changing one variable has an indirect effect on another.
+```
+
+## Rotating An Array
+
+### Clockwise Rotation
+
+- [Medium Answer link](https://betterprogramming.pub/3-ways-to-rotate-an-array-2a45b39f7bec)
+- [Leetcode Question](https://leetcode.com/problems/rotate-array/)
+- The algorithm
+  - We are given the array and a variable `k` as input. `k` means "the number of rotations we want in clockwise direction".
+  - The value of variable `n = array.length`
+  - If `k > n`
+    - This will mean that we are doing redundant rotations as the max rotations an array can have is `n`
+    - `k = k % n`
+  - The first step is to reverse the full array => `reverse(arr,0,n-1)`
+  - Then, reverse the array from index 0 to `k-1` => `reverse(arr,0,k-1)`
+  - Then reverse the array from index `k` to `n-1` (from k to end) => `reverse(arr,k,n-1)`
+- Code is as follows
+
+```java
+class Solution {
+    public void reverse(int nums[], int start, int end){
+        while(start < end){
+            // Swapping efficiently using XOR
+            // https://betterexplained.com/articles/swap-two-variables-using-xor/
+            nums[start] = nums[start] ^ nums[end];
+            nums[end] = nums[start] ^ nums[end];
+            nums[start] = nums[start] ^ nums[end];
+            // Decrement
+            ++start; --end;
+        }
+    }
+
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;
+        // Reverse the full array
+        reverse(nums,0,n-1);
+        // Reverse from 0 to k
+        reverse(nums,0,k-1);
+        // Reverse from k+1 to n-1
+        reverse(nums,k,n-1);
+
+    }
+}
+```
+
+### Anticlockwise Rotation
+
+- Dry Run
+  - Original Array = 1 2 3 4 5 6 7
+  - Result Array = 3 4 5 6 7 1 2
+  - k = 2
+    - n = 7
+    - k = 2
+
+| Initial       | Result        | Operation                              |
+| ------------- | ------------- | -------------------------------------- |
+| 1 2 3 4 5 6 7 | 1 2 7 6 5 4 3 | reverse k to n-1 => `reverse(arr,2,6)` |
+| 1 2 7 6 5 4 3 | 2 1 7 6 5 4 3 | reverse 0 to k-1 => `reverse(arr,0,1)` |
+| 2 1 7 6 5 4 3 | 3 4 5 6 7 1 2 | reverse 0 to n-1 => `reverse(arr,2,6)` |
+
+```java
+class Solution {
+    public void reverse(int nums[], int start, int end){
+        while(start < end){
+            // Swapping efficiently using XOR
+            // https://betterexplained.com/articles/swap-two-variables-using-xor/
+            nums[start] = nums[start] ^ nums[end];
+            nums[end] = nums[start] ^ nums[end];
+            nums[start] = nums[start] ^ nums[end];
+            // Decrement
+            ++start; --end;
+        }
+    }
+
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;
+        // Reverse the full array
+        reverse(nums,k,n-1);
+        reverse(nums,0,k-1);
+        reverse(nums,0,n-1);
+
+    }
 }
 ```
