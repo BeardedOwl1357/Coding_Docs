@@ -8,7 +8,8 @@
       - [Upper Bound](#upper-bound)
       - [Index of First Occurrence of Element](#index-of-first-occurrence-of-element)
       - [Index of Last Occurrence of Element](#index-of-last-occurrence-of-element)
-      - [Rotated Sorted Array](#rotated-sorted-array)
+      - [Number of Times a Sorted Array is Rotated](#number-of-times-a-sorted-array-is-rotated)
+      - [TODO : Searching in a rotated sorted array](#todo--searching-in-a-rotated-sorted-array)
   - [Subarrays](#subarrays)
     - [Prefix Sum](#prefix-sum)
     - [Partial Sum](#partial-sum)
@@ -164,15 +165,89 @@ public int last_occurrence_bs(int arr[], int target){
 }
 ```
 
-#### Rotated Sorted Array
+#### Number of Times a Sorted Array is Rotated
+
+> First, learn how to rotate an array. Refer to [Rotating an array clockwise](#clockwise-rotation) and [Rotating an array anti clockwise](#anticlockwise-rotation)
 
 - Let us have an original sorted array as `{2,5,7,9,12,15,23,30,45}`
 - Rotations of this sorted array are as follows
+  - In the below case, length = `n = 9`
 
 | Count | Clockwise                | Anti clockwise           |
 | ----- | ------------------------ | ------------------------ |
-| 0     | {2,5,7,9,12,15,23,30,45} | {2,5,7,9,12,15,23,30,45} |
-| 1     | {45,2,5,7,9,12,15,23,30} | {5,7,9,12,15,23,30,45,2} |
+| 0     | {2 5 7 9 12 15 23 30 45} | {2 5 7 9 12 15 23 30 45} |
+| 1     | {45 2 5 7 9 12 15 23 30} | {5 7 9 12 15 23 30 45 2} |
+| 2     | {30 45 2 5 7 9 12 15 23} | {7 9 12 15 23 30 45 2 5} |
+| 3     | {23 30 45 2 5 7 9 12 15} | {9 12 15 23 30 45 2 5 7} |
+| 4     | {15 23 30 45 2 5 7 9 12} | {12 15 23 30 45 2 5 7 9} |
+| 5     | {12 15 23 30 45 2 5 7 9} | {15 23 30 45 2 5 7 9 12} |
+| 6     | {9 12 15 23 30 45 2 5 7} | {23 30 45 2 5 7 9 12 15} |
+| 7     | {7 9 12 15 23 30 45 2 5} | {30 45 2 5 7 9 12 15 23} |
+| 8     | {5 7 9 12 15 23 30 45 2} | {45 2 5 7 9 12 15 23 30} |
+| 9     | {2 5 7 9 12 15 23 30 45} | {2 5 7 9 12 15 23 30 45} |
+
+- There is an interesting pattern
+
+| Rotation                 | Clockwise Rotations | Anti clockwise Rotations |
+| ------------------------ | ------------------- | ------------------------ |
+| {2 5 7 9 12 15 23 30 45} | 0                   | 9                        |
+| {45 2 5 7 9 12 15 23 30} | 1                   | 8                        |
+| {30 45 2 5 7 9 12 15 23} | 2                   | 7                        |
+| {23 30 45 2 5 7 9 12 15} | 3                   | 6                        |
+| {15 23 30 45 2 5 7 9 12} | 4                   | 5                        |
+| {12 15 23 30 45 2 5 7 9} | 5                   | 4                        |
+| {9 12 15 23 30 45 2 5 7} | 6                   | 3                        |
+| {7 9 12 15 23 30 45 2 5} | 7                   | 2                        |
+| {5 7 9 12 15 23 30 45 2} | 8                   | 1                        |
+| {2 5 7 9 12 15 23 30 45} | 9                   | 0                        |
+
+- An interesting pattern emerges
+
+  - Number of Clockwise rotations = `Index of Minimum element`
+  - Number of anticlockwise rotations = `length(array) - Number of clockwise rotations`
+
+- Finding index of minimum element through binary search (n = length_of_array)
+  - The criteria for minimum element is that it is smaller than both of its adjoining elements
+    - To calculate index of previous element, use `(n + index - 1) % n`
+    - To calculate index of next element, use `(index + 1) % n`
+    - if `arr[prev] > arr[index] && arr[next] > arr[index]`, then `index` is the `min_index`
+  - To decide where should the search be conducted next
+    - To check whether left half is sorted or not, we check whether the current element is greater than the first element or not. If it is, then it means that the right half of the array is unsorted and therein lies the minimum element
+    - To check whether right half is sorted or not, we check whether the current element is lesser than the end element or not. If it is, then it means that the left half of the array is unsorted and therein lies the minimum element
+- Code
+
+```java
+class Solution{
+    public int cw_rotation_count(int arr[]){
+        int start = 0, end = arr.length - 1;
+        int n = arr.length;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            // Condition for minimum element
+            int prev = (n + (mid - 1))%n, next = (mid + 1)%n;
+            if(arr[mid] < arr[prev] && arr[mid] < arr[next])
+                return mid;
+            // Is the "left" half of the array sorted? If yes, we move right
+            if(arr[mid] > arr[0])
+                start = mid + 1;
+            // If the left half is not sorted, right is and therefore, we move left
+            else
+                end = mid - 1;
+        }
+        return -1;
+    }
+
+    public int acw_rotation_count(int arr[]){
+        return arr.length - cw_rotation_count(arr);
+    }
+
+}
+```
+
+#### TODO : Searching in a rotated sorted array
+
+- [Find index of minimum element](#number-of-times-a-sorted-array-is-rotated)
+- [Watch this video lol](https://youtu.be/r3pMQ8-Ad5s)
 
 ## Subarrays
 
@@ -341,7 +416,7 @@ class Solution {
         }
     }
 
-    public void rotate(int[] nums, int k) {
+    public void rotate_cw(int[] nums, int k) {
         int n = nums.length;
         k = k % n;
         // Reverse the full array
@@ -372,7 +447,7 @@ class Solution {
 
 ```java
 class Solution {
-    public void reverse(int nums[], int start, int end){
+    public void reverse_acw(int nums[], int start, int end){
         while(start < end){
             // Swapping efficiently using XOR
             // https://betterexplained.com/articles/swap-two-variables-using-xor/
