@@ -9,7 +9,7 @@
       - [Index of First Occurrence of Element](#index-of-first-occurrence-of-element)
       - [Index of Last Occurrence of Element](#index-of-last-occurrence-of-element)
       - [Number of Times a Sorted Array is Rotated](#number-of-times-a-sorted-array-is-rotated)
-      - [TODO : Searching in a rotated sorted array](#todo--searching-in-a-rotated-sorted-array)
+      - [Searching in a rotated sorted array](#searching-in-a-rotated-sorted-array)
   - [Subarrays](#subarrays)
     - [Prefix Sum](#prefix-sum)
     - [Partial Sum](#partial-sum)
@@ -214,7 +214,8 @@ public int last_occurrence_bs(int arr[], int target){
   - To decide where should the search be conducted next
     - To check whether left half is sorted or not, we check whether the current element is greater than the first element or not. If it is, then it means that the right half of the array is unsorted and therein lies the minimum element
     - To check whether right half is sorted or not, we check whether the current element is lesser than the end element or not. If it is, then it means that the left half of the array is unsorted and therein lies the minimum element
-- Code
+
+> If the array (or subarray) is not rotated, then `arr[end] > arr[start]`. This means that the array (or subarray) is already sorted and thus, the minimum index is `start`
 
 ```java
 class Solution{
@@ -222,20 +223,23 @@ class Solution{
         int start = 0, end = arr.length - 1;
         int n = arr.length;
         while(start <= end){
+            // If array is not rotated
+            if(arr[end] > arr[start])
+                return start;
+
             int mid = start + (end - start) / 2;
-            // Condition for minimum element
             int prev = (n + (mid - 1))%n, next = (mid + 1)%n;
+
             if(arr[mid] < arr[prev] && arr[mid] < arr[next])
                 return mid;
-            // Is the "left" half of the array sorted? If yes, we move right
-            if(arr[mid] > arr[0])
+            if(arr[mid] >= arr[start])
                 start = mid + 1;
-            // If the left half is not sorted, right is and therefore, we move left
             else
                 end = mid - 1;
         }
         return -1;
     }
+
 
     public int acw_rotation_count(int arr[]){
         return arr.length - cw_rotation_count(arr);
@@ -244,10 +248,51 @@ class Solution{
 }
 ```
 
-#### TODO : Searching in a rotated sorted array
+#### Searching in a rotated sorted array
 
-- [Find index of minimum element](#number-of-times-a-sorted-array-is-rotated)
+- [Refer to this to get the intution behind the current algorithm : Find index of minimum element](#number-of-times-a-sorted-array-is-rotated)
 - [Watch this video lol](https://youtu.be/r3pMQ8-Ad5s)
+- The logic is as follows
+  - Determine which half of the array is sorted
+  - Determine whether the `target` element is present inside this sorted half or not
+    - If present, then the new search space is reduced to the sorted half
+    - If not, we check for the other half and do the same
+
+```java
+class Solution
+{
+
+    public int search_rotated(int arr[], int target){
+        int start = 0, end = arr.length - 1;
+        int res = -1;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == target)
+                return mid;
+
+            // Check if left half of array is sorted or not
+            if(arr[start] <= arr[mid]){
+                // Check if target lies in this sorted half
+                if(arr[start] <= target && target <= arr[mid])
+                    end = mid - 1; // target lies in this half
+                else
+                    start = mid + 1; // target lies in right hald
+            }
+
+            else // right half is sorted
+            {
+                // Check if target lies in this half or not
+                if(arr[mid] <= target && target <= arr[end])
+                    start = mid + 1 ; // Answer is in right half
+                else
+                    end = mid - 1; // Answer lies in left half
+
+            }
+        }
+        return res;
+    }
+}
+```
 
 ## Subarrays
 
