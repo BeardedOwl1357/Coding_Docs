@@ -10,6 +10,7 @@
       - [Index of Last Occurrence of Element](#index-of-last-occurrence-of-element)
       - [Number of Times a Sorted Array is Rotated](#number-of-times-a-sorted-array-is-rotated)
       - [Searching in a rotated sorted array](#searching-in-a-rotated-sorted-array)
+      - [Minimum Difference Element in a Sorted Array](#minimum-difference-element-in-a-sorted-array)
   - [Subarrays](#subarrays)
     - [Prefix Sum](#prefix-sum)
     - [Partial Sum](#partial-sum)
@@ -290,6 +291,51 @@ class Solution
             }
         }
         return res;
+    }
+}
+```
+
+#### Minimum Difference Element in a Sorted Array
+
+[Source](https://youtu.be/3RhGdmoF_ac)
+
+- Given a sorted array `arr`, find the index element in the array which has **absolute minimum difference** with the given number `target`
+  - arr = {1,2,3,8,10,15} | target = 12 | answer = 4
+- This is a really interesting question. There are two things to consider
+  - If the `target` already exists in the array, then the index of `target` in the array will be the answer as the minimum absolute difference will be 0
+  - If the `target` does not exist in the array, then the answer lies within its adjacent neighbours (if the `target` actually existed)
+    - For example, arr = {1,2,3,8,10,15} | target = 12 | answer = 4
+      - If `target` existed, the array would be `{1,2,3,8,10,12,15}`
+      - Neighbours of 12 = 10,15
+      - abs(15 - 12) = 3
+      - abs(10 - 12) = 2 => Minimum difference
+    - \_This is because in a sorted array, the right adjacent neighbour is greater and left adjacent neighbour is smaller than the element
+- The interesting observation is that if a normal binary search is applied, then if the element does not exist, then `start` and `end` index will point to the neighbours of `target` (if the `target` existed in array)
+  ![](Images/2023-02-08-22-26-57.png)
+
+`INSERT A DIAGRAM HERE`
+
+```java
+class Solution{
+    public int abs_diff_ele_index(int arr[], int target){
+        int start = 0, end = arr.length - 1;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == target)
+                return mid;
+            if(target > arr[mid])
+                start = mid + 1;
+            else
+                end = mid - 1;
+        }
+        int n = arr.length;
+        // If element > maximum element of array i.e. arr[n-1], then start = n, end = n-1
+        start = start % n;
+        // If element < minimum element of array i.e. arr[0], then start = 0, end = -1
+        end = (end + n) % n;
+        if(Math.abs(target - arr[start]) < Math.abs(target - arr[end]) )
+            return start; // target - arr[start] gives the least difference
+        return end; // This means that target - arr[end] gives the least difference
     }
 }
 ```
