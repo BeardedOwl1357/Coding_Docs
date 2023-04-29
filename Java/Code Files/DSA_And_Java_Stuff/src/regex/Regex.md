@@ -1,3 +1,12 @@
+Table of Contents
+<!-- TOC -->
+* [Character class](#character-class)
+* [Quantifiers](#quantifiers)
+* [Special Characters](#special-characters)
+* [Metacharacters](#metacharacters)
+* [Groups](#groups)
+<!-- TOC -->
+
 # Character class
 - Source : https://www.youtube.com/live/f0lZbeueVzU?feature=share&t=628
 - Used for filtering a single character
@@ -45,3 +54,15 @@
 | `\W`          | Can be an uppercase word character |
 | `\b`          | Represents word boundary           |
 | `\B`          | Represents "non word boundary"     |
+
+# Groups
+- Denoted by `()`
+- A subsequence of matched string
+- Tutorial : https://www.youtube.com/watch?v=c9HbsUSWilw
+- For example, if we have a regex like `^\+?(\d{2,3})(\d{10})` for mobile number validation
+  - It first checks whether the string starts with one or none `+`
+  - Then it checks country code (which can be 2-3 digits long). This is the group 1 and is defined in above as `(\d{2,3})`
+  - Then it checks for 10 digit mobile number. This is group 2. Defined as `(\d{10})`
+- If any section of regex is included within parenthesis `()`, then it is called a group.
+- A group is a subsequence
+- Group 0 = input string
