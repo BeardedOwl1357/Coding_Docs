@@ -27,3 +27,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/src/loggingandstuff/str_logs.txt
+/src/loggingandstuff/xml_logs.xml
