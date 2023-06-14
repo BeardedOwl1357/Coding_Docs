@@ -2,20 +2,21 @@ package stringformattingoperations;
 
 public class Padding {
     public static void main(String[] args) {
-        System.out.println(String.format("%-20s \t %-20s","Left Padding","Right Padding"));
-        /* Left Padding */
-        for(int num = 0; num < 100; num += 9){
-            /*
-                Logic for Left Padding
-                    - %06d
-                        - 0 = Pad with 0
-                        - 6 = Pad to a length of 6
-                        - d = Integer
+        // Padding with 0s on left (This means that the number is right justified)
+        String NUM_FORMAT_LEFTPADDING = "%05d"; // Padded to length of 5
+        
+        String NUM_FORMAT_RIGHTPADDING = "%-5d"; // Initially padded from right with space but the `replace()` method will be used to replace empty-space with 0
+        
+        String OUTPUT_FORMAT = "%-20s \t %-20s\n"; // Left justified, string of 20 width, left justified
+        
+        System.out.printf(OUTPUT_FORMAT,"Left Padding","Right Padding");
+        for(int num = 1; num <= 100000; num *= 9 )
+            System.out.printf(
+                    OUTPUT_FORMAT,
+                    String.format(NUM_FORMAT_LEFTPADDING,num),
+                    String.format(NUM_FORMAT_RIGHTPADDING,num).replace(' ','0')
+                    );
 
-             */
-            String leftPadding = String.format("%05d",num);
-            String rightPadding = String.format("%-5d",num).replace(' ','0');
-            System.out.println(String.format("%-20s \t %-20s",leftPadding,rightPadding));
-        }
+
     }
 }
