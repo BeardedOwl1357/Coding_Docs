@@ -476,6 +476,23 @@ x = 0
 Wow! So x becomes 0 right at the get-go. That’s ok by itself, but because x and y are at the same location, we just made y zero as well! We’ve lost the original values, a problem known as aliasing: changing one variable has an indirect effect on another.
 ```
 
+## All Row and Column Maximum of a 2D Array
+The problem statement is that we need to find the maximum values of each row and column in a given 2D array of size `n*m`. To do so, the algorithm is as follows
+- `rows` = Number of rows
+- `cols` = Number of columns
+
+```java
+int[] rowMax = new int[rows] ; Arrays.fill(rowMax,0);
+int[] colMax = new int[cols] ; Arrays.fill(colMax,0);
+
+for(int row = 0 ; row < rows; ++row){
+    for(int col = 0; col < cols; ++col){
+        rowMax[row] = Math.max(rowMax[row], arr[row][col]);
+        colMax[col] = Math.max(colMax[col], arr[row][col]);
+    }
+}
+```
+
 ## Rotating An Array
 
 ### Clockwise Rotation
