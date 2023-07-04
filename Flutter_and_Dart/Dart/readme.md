@@ -1,3 +1,20 @@
+Table of Contents
+
+- [Tutorial](#tutorial)
+- [Basics](#basics)
+  - [Reading and Writing to Console / Stdout](#reading-and-writing-to-console--stdout)
+  - [Types of Comments](#types-of-comments)
+- [Variables and Datatypes](#variables-and-datatypes)
+  - [Datatypes](#datatypes)
+  - [The difference between `final` and `const`](#the-difference-between-final-and-const)
+  - [Nullable / Optional Variables](#nullable--optional-variables)
+  - [How datatypes work](#how-datatypes-work)
+  - [Strings](#strings)
+- [Control Flow](#control-flow)
+  - [Logical Operators](#logical-operators)
+  - [IF-ELSE-ELSE IF](#if-else-else-if)
+  - [Ternary Operator](#ternary-operator)
+
 # Tutorial
 
 - https://www.youtube.com/watch?v=Fqcsow_7go4
@@ -130,6 +147,40 @@ Very good
   print(multi_line);
 ```
 
-# Control Flow : IF-ELSE
+# Control Flow
 
-https://youtu.be/Fqcsow_7go4?t=4238
+## Logical Operators
+
+- AND : `&&`
+- OR : `||`
+- NOT : `!`
+
+## IF-ELSE-ELSE IF
+
+```dart
+import 'dart:io';
+
+void main() {
+  int age = 20;
+  // With curly braces
+  if (age >= 18 && age <= 25) {
+    print("Young Adult");
+  } else if (age > 25) {
+    print("Experienced Adult");
+  } else {
+    print("Child");
+  }
+
+  // Same logic without curly braces
+  if (age >= 18 && age <= 25)
+    print("Young Adult");
+  else if (age > 25)
+    print("Experienced Adult");
+  else
+    print("Child");
+}
+```
+
+## Ternary Operator
+
+https://youtu.be/Fqcsow_7go4?t=5339
