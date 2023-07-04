@@ -95,3 +95,25 @@ FROM
 	DailySales
 ;
 ```
+
+# Functions
+
+## LENGTH Functions
+
+Inspired from this leetcode question https://leetcode.com/problems/invalid-tweets/description/ and https://stackoverflow.com/questions/1734334/mysql-length-vs-char-length?rq=1 , I shall discuss LENGTH() function in detail
+
+The stackoverflow post and leetcode solution are in MySQL but in this, I will be discussing from the point of view of Oracle SQL
+
+- [`LENGTH()`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/LENGTH.html#GUID-8F97F652-5AE8-4457-AFD7-7A6F25551E0C) : It measures length in terms of number of characters. It is equivalent to `CHAR_LENGTH()` of MySQL
+- [`LENGTHB()`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/LENGTH.html#GUID-8F97F652-5AE8-4457-AFD7-7A6F25551E0C) : It measures length in terms of number of bytes. It is equivalent to `LENGTH()` of MySQL
+
+As quoted in the stackoverflow answer
+
+> This is especially relevant for Unicode, in which most characters are encoded in two bytes. Or UTF-8, where the number of bytes varies. For example:
+
+```sql
+select length(_utf8 '€'), char_length(_utf8 '€')
+-- Output = 3, 1
+```
+
+As you can see the Euro sign occupies 3 bytes (it's encoded as 0xE282AC in UTF-8) even though it's only one character.
