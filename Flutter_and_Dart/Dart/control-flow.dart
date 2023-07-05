@@ -1,7 +1,9 @@
 import 'dart:io';
 
 void main() {
-  int age = (int) stdin.readLineSync();
+  int age = 20;
+  // Learn to read user input and convert to integer
+  // int age = stdin.readLineSync();
   // With curly braces
   if (age >= 18 && age <= 25) {
     print("Young Adult");

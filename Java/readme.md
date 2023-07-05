@@ -1109,7 +1109,7 @@ public class Main{
 | containsValue(`<value>`)       | Checks whether a value exists or not                                |
 | entrySet()                     | Converts a set into map. Iterators can then be used                 |
 | keySet()                       | Returns a set of keys of map                                        |
-| value()                        | Returns a set of values of map                                      |
+| values()                       | Returns a set of values of map                                      |
 
 ```java
 import java.util.Map;
