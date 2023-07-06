@@ -86,6 +86,7 @@ void main() {
 By default, variables cannot have `null` value. For a variable of any datatype to have null value, we need to add `?` in front of it. For example, see the following snippet of code
 
 - To give a datatype the ability to have a null value, append `?` in front of it. For example, `String?`
+- To access an optional variable (a variable which can have null) as if it has the value, use `!`.
 - While accessing a field of an object which can be a null, we need to append `?` in front of it. For example, `String? x ; print(x?.length);`
   - If we use the above, we will either get the length of String (if the variable is not null) or get null itself
   - However, we can display / provide a different value instead of null by using `??`. For example, `String? x; print(x?.length ?? 0)`
@@ -107,6 +108,8 @@ void main() {
     * Let's try to get the length of a variable which is assigned null
     * For this, we need to use `?` operator while accessing the `length` value
   */
+  print(
+      "Length of ${x} = ${x!.length}"); // Assumes that `x` is not null and normally tries to access the information
   print(
       "Length of ${x} = ${x?.length}"); // If x is not null, return length else return null
   print(

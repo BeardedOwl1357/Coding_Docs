@@ -12,8 +12,10 @@ void main() {
 
   /*
     * Let's try to get the length of a variable which is assigned null
-    * For this, we need to use `?` operator while accessing the `length` value 
+    * For this, we need to use `?` operator while accessing the `length` value
   */
+  print(
+      "Length of ${x} = ${x!.length}"); // Assumes that `x` is not null and normally tries to access the information
   print(
       "Length of ${x} = ${x?.length}"); // If x is not null, return length else return null
   print(
