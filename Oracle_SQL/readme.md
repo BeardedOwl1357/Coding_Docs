@@ -1,3 +1,17 @@
+Table of Contents
+
+- [Select](#select)
+  - [Distinct](#distinct)
+- [Dates](#dates)
+  - [Converting String to Date](#converting-string-to-date)
+  - [Formatting Date](#formatting-date)
+- [Functions](#functions)
+  - [LENGTH Functions](#length-functions)
+- [Miscellaneous Operations](#miscellaneous-operations)
+  - [Using Update Statement and CASE statement](#using-update-statement-and-case-statement)
+- [Miscellaneous](#miscellaneous)
+  - [Pivot](#pivot)
+
 # Select
 
 ## Distinct
@@ -137,5 +151,146 @@ UPDATE Salary
         WHEN sex = 'm' THEN 'f'
         ELSE 'm'
     END
+;
+```
+
+# Miscellaneous
+
+## Pivot
+
+- Video Tutorial : https://www.youtube.com/watch?v=smCBBgN8nEE
+- Question to practice on : https://leetcode.com/problems/reformat-department-table/description/
+
+```sql
+DROP TABLE myTable;
+
+CREATE TABLE myTable (
+  name varchar2(255) default NULL,
+  email varchar2(255) default NULL,
+  country varchar2(100) default NULL,
+  joindate varchar2(255)
+);
+
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Alisa Wilson','a@aol.ca','Colombia','12-04-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Reese Boyer','quis.pede@yahoo.edu','Indonesia','21-04-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Vladimir Thornton','amet.nulla@icloud.net','Vietnam','06-09-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Xanthus Webster','orci.donec.nibh@aol.com','Costa Rica','27-12-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Thor Santana','et.euismod@icloud.ca','Russian Federation','25-06-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Sylvia Tucker','id.enim@aol.com','Peru','30-12-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Ronan Mclean','lobortis.quam.a@aol.edu','Ukraine','27-10-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Colby Lindsey','arcu.eu@aol.net','Philippines','03-04-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Tate Ortiz','luctus.vulputate.nisi@yahoo.ca','Italy','08-03-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Susan Blair','non@hotmail.net','Spain','14-04-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Gage Brock','donec.egestas@protonmail.edu','India','28-11-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('India Roy','rutrum.lorem@outlook.couk','Germany','12-06-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Stone Strong','taciti.sociosqu@aol.edu','Peru','14-07-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Jorden Knapp','sed.tortor@protonmail.org','Singapore','11-10-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Yvette Harding','lorem@google.net','South Korea','28-05-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Hu Stevenson','erat.volutpat@yahoo.net','United States','18-09-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Samantha Rios','risus.in@outlook.ca','Ireland','05-06-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Kevin Berger','proin.sed@yahoo.com','Canada','24-10-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Hedley Hernandez','odio.auctor@icloud.org','Peru','29-12-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Kevin Rosa','ipsum@outlook.com','United Kingdom','06-03-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Walter Frederick','blandit@hotmail.ca','Ireland','09-01-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Carl Murray','aliquam.vulputate@google.ca','Sweden','30-01-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Blake Pittman','pellentesque.ut@hotmail.com','Norway','01-11-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Cara Henry','pede.suspendisse.dui@hotmail.net','Vietnam','05-05-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Fulton Griffin','dolor.nonummy.ac@google.org','France','12-04-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Deanna Hughes','libero.mauris.aliquam@google.couk','Vietnam','20-04-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Ezra Hampton','malesuada.fames.ac@aol.edu','Australia','26-11-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Timothy Mack','suspendisse.dui@icloud.edu','Mexico','13-10-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Norman Johnson','semper.egestas@yahoo.ca','Chile','19-02-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Branden Cardenas','libero.morbi@outlook.edu','Chile','02-12-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Lynn Mueller','malesuada.vel@outlook.edu','Philippines','27-03-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Marshall Michael','phasellus.vitae@aol.ca','Brazil','02-01-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Madeline Navarro','mollis@yahoo.net','Russian Federation','11-05-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Yvette Bradshaw','vulputate.risus.a@protonmail.org','Philippines','12-04-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Tad Whitfield','dignissim.tempor@outlook.ca','Pakistan','02-12-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Jackson Branch','vestibulum@hotmail.ca','United States','05-10-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Colby Mack','lobortis.class@icloud.com','Germany','24-01-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Drake Chapman','imperdiet@icloud.net','Costa Rica','01-10-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Anne Holman','habitant@google.ca','Austria','28-11-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Jonas Frederick','tempor@google.com','Belgium','29-06-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Kirsten Harris','nonummy.ut.molestie@hotmail.net','Mexico','18-06-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Montana Kennedy','leo@icloud.ca','Poland','27-01-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Brett Dodson','mauris@hotmail.net','Philippines','28-05-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Uriah Stanley','augue@google.com','South Africa','02-09-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Vladimir French','pede.cum.sociis@google.edu','India','02-01-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Teagan Ballard','vel.lectus.cum@protonmail.couk','India','09-09-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Deirdre Stout','lorem@google.couk','Spain','13-03-24');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Beck Walters','at.velit@aol.couk','Austria','17-08-23');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Hayfa Leonard','nec.tellus.nunc@icloud.couk','Poland','18-12-22');
+INSERT INTO myTable (name,email,country,joindate)
+VALUES ('Brenda Fields','metus.in@yahoo.com','South Africa','24-04-23');
+
+SELECT TO_CHAR(TO_DATE(joinDate,'dd-mm-yy'),'Mon') FROM MyTable;
+
+SELECT * FROM(
+    SELECT
+        T.*,
+        TO_CHAR(TO_DATE(joinDate,'dd-mm-yy'),'Mon') actual_month
+    FROM
+        MyTable T
+)
+PIVOT(
+    COUNT(country)
+    FOR actual_month IN (
+        'Jan','Feb',
+        'Mar','Apr',
+        'May','Jun',
+        'Jul','Aug',
+        'Sep','Oct',
+        'Nov','Dec'
+    )
+)
 ;
 ```
