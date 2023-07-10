@@ -14,6 +14,14 @@ Table of Contents
   - [Logical Operators](#logical-operators)
   - [IF-ELSE-ELSE IF](#if-else-else-if)
   - [Ternary Operator](#ternary-operator)
+- [Loops](#loops)
+- [Functions](#functions)
+  - [Basic Functions](#basic-functions)
+  - [Records (Tuples)](#records-tuples)
+    - [Basics](#basics-1)
+    - [Named Records](#named-records)
+  - [Named Arguments](#named-arguments)
+- [Classes](#classes)
 
 # Tutorial
 
@@ -161,7 +169,6 @@ Very good
 ## IF-ELSE-ELSE IF
 
 ```dart
-import 'dart:io';
 
 void main() {
   int age = 20;
@@ -186,4 +193,139 @@ void main() {
 
 ## Ternary Operator
 
-https://youtu.be/Fqcsow_7go4?t=5339
+The syntax for ternary operator is as follows
+
+```
+<condition> ? <when condition is True> : <when condition is False>
+```
+
+```dart
+void main() {
+  int age = 20;
+  print("Is adult? \t ${age >= 18 ? "Yes" : "No"}");
+}
+```
+
+# Loops
+
+```dart
+void main() {
+  // For loop
+  for (int i = 0; i < 5; ++i) print("Hello ${i}");
+
+  // While loop
+  int i = 5;
+  while (i >= 0) {
+    print("Mellow ${i}");
+    i -= 1;
+  }
+
+  // Do-While loop
+  do {
+    print("Do while ${i}");
+    i += 1;
+  } while (i != i); // i!=i will always be false
+
+  // Continue keyword. Print first 10 Natural numbers but skip even numbers
+  for (int num = 1; num <= 10; ++num) {
+    if (num % 2 == 0) continue;
+    print("Number = ${num}");
+  }
+
+  // Break : Break when we find 7
+  for (int num = 1; num <= 10; ++num) {
+    if (num == 7) break;
+    print("Break Number = ${num}");
+  }
+}
+```
+
+# Functions
+
+It is a good practice to explictly state the datatypes involved in a function (parameters, return types etc). **By default, `dynamic` datatype is used**
+
+## Basic Functions
+
+```dart
+int add(int x, int y) {
+  return x + y;
+}
+
+String displayFullName(String firstName, String lastName) {
+  return '${firstName} ${lastName}';
+}
+
+void main() {
+  print(add(5, 2));
+  print(displayFullName("bearded", "owl"));
+  (int, String, bool) temp = getMultiple();
+  print('All values in temp : ${temp}');
+  print('1st value in temp : ${temp.$1}');
+  print('2nd value in temp : ${temp.$2}');
+  print('3rd value in temp : ${temp.$3}');
+}
+
+```
+
+## Records (Tuples)
+
+### Basics
+
+```dart
+// Tuples
+(int, String, bool) getMultiple() {
+  return (10, "Hello", false);
+}
+
+void main() {
+  print(add(5, 2));
+  print(displayFullName("bearded", "owl"));
+  (int, String, bool) temp = getMultiple();
+  print('All values in temp : ${temp}');
+  print('1st value in temp : ${temp.$1}');
+  print('2nd value in temp : ${temp.$2}');
+  print('3rd value in temp : ${temp.$3}');
+}
+```
+
+### Named Records
+
+```dart
+// Named Records
+({int age, String name, bool isAdult}) getNamedMultiple() {
+  int age = 10;
+  return (age: age, name: "John", isAdult: age >= 18 ? true : false);
+}
+
+void main() {
+  final stuff = getNamedMultiple();
+  print(stuff.runtimeType);
+
+  print(stuff.age);
+  print(stuff.name);
+  print(stuff.isAdult);
+}
+```
+
+## Named Arguments
+
+By default, dart uses positional arguments that is, while calling the functions, the function call must have parameters provided to it in the same order as in the definition of the function. Using named arguments, we can avoid this "positional dependency".
+
+```dart
+// Named arguments
+void printDetails({required String name, required int age, int? salary}) {
+  print('Name : ${name}');
+  print('Age : ${age}');
+  print('Salary : ${salary ?? 0}'); // This statement means "if salary is not null, print salary else print 0"
+}
+
+void main() {
+  printDetails(name: 'John', age: 25);
+  printDetails(name: 'John', age: 25, salary: 1500);
+}
+
+```
+
+# Classes
+
+https://youtu.be/Fqcsow_7go4?t=9958
