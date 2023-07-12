@@ -21,7 +21,10 @@ Table of Contents
     - [Basics](#basics-1)
     - [Named Records](#named-records)
   - [Named Arguments](#named-arguments)
-- [Classes](#classes)
+- [OOPS](#oops)
+  - [Basics of class](#basics-of-class)
+  - [Misc : Immutable Classes](#misc--immutable-classes)
+  - [Inheritance](#inheritance)
 
 # Tutorial
 
@@ -326,6 +329,112 @@ void main() {
 
 ```
 
-# Classes
+# OOPS
+
+## Basics of class
 
 https://youtu.be/Fqcsow_7go4?t=9958
+
+There are a few quirks about classes in Dart as compared to other languages. They are defined as follows
+
+- Variables prefixed with `_` are private variables
+- We cannot have multiple constructors in a class like we do in other langauges
+  - To have multiple constructors, we can have one default constructor and other constructors need to be "named" : https://stackoverflow.com/a/49691200
+  - To define a getter for a variable, use `get` keyword. This keyword is prefixed by the datatype of the variable for which are defining the getter. For ease of use, use arrow functions
+  - To define a setter for a variable, use `set` keyword. For ease of use, use arrow functions
+
+See the code below and relate to the above points
+
+```dart
+class Rectangle {
+  // Variables
+  // Private variables are prefixed by _
+  double _length = 0;
+  double _breadth = 0;
+  // Constructor
+  // Default Constructor
+  Rectangle() {
+    print('Length = ${_length} \t Breadth = ${_breadth}');
+  }
+
+  // Named constructor
+  Rectangle.overrided(this._breadth, this._length) {
+    print('Length = ${_length} \t Breadth = ${_breadth}');
+  }
+
+  /* For functions with a single statement, use arrow functions */
+
+  // Setters
+  // By using the `set` keyword, we tell dart that the sole purpose of this method is to set a value.
+  set setLength(double length) => this._length = length;
+  set setBreadth(double breadth) => this._breadth = breadth;
+
+  // Getters
+  // By using the `get` keyword, we tell dart that the sole purpose of this method is to get a value and thus, we don't need to use `return` keyword.
+  double get getLength => _length;
+  double get getBreadth => _breadth;
+
+  /* STATIC VARIABLES and METHODS */
+  static String NAME = "Raj";
+  static int AGE = 25;
+
+  static void greet() => print("Hello Human");
+}
+
+void main() {
+  // Calling default constructor
+  Rectangle rect1 = Rectangle();
+  // Calling named constructor
+  Rectangle rect2 = Rectangle.overrided(5, 16);
+
+  // Using setters
+  rect1.setLength = 15;
+  rect1.setBreadth = 25;
+  rect2.setLength = 16;
+  rect2.setBreadth = 26;
+
+  // Accessing getters
+  print(
+      "rect1 length = ${rect1.getLength} \t rect2 length = ${rect2.getLength}");
+  print(
+      "rect1 length = ${rect1.getBreadth} \t rect2 length = ${rect2.getBreadth}");
+
+  // Using static variables and methods
+  print("Name = ${Rectangle.NAME} \t Age = ${Rectangle.AGE}");
+  Rectangle.greet();
+}
+```
+
+## Misc : Immutable Classes
+
+```dart
+class ImmutableRectangle {
+  // To make a class immutable, make each variable final
+  final double length;
+  final double breadth;
+
+  // Make only one constructor
+  // Named parameters can only be used on public variables (`_` not allowed)
+  ImmutableRectangle({required this.length, required this.breadth});
+
+  // Positional parameters can be used too
+  ImmutableRectangle.positional(this.length, this.breadth);
+}
+
+void main() {
+  ImmutableRectangle rect1 = ImmutableRectangle(length: 10, breadth: 20);
+  // rect1.breadth = 10; // Gives error as we cannot change its value once it is assigned
+  print("length = ${rect1.length} \t breadth = ${rect1.breadth}");
+
+  // Using positional constructor
+
+  ImmutableRectangle rect2 = ImmutableRectangle.positional(16, 20);
+  // rect2.breadth = 16; // Gives error as we cannot change its value once it is assigned
+  print("length = ${rect2.length} \t breadth = ${rect2.breadth}");
+}
+
+```
+
+## Inheritance
+
+https://youtu.be/Fqcsow_7go4?t=13210

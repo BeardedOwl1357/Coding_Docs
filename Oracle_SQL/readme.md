@@ -11,6 +11,7 @@ Table of Contents
   - [Using Update Statement and CASE statement](#using-update-statement-and-case-statement)
 - [Miscellaneous](#miscellaneous)
   - [Pivot](#pivot)
+  - [LISTAGG](#listagg)
 
 # Select
 
@@ -294,3 +295,8 @@ PIVOT(
 )
 ;
 ```
+
+## LISTAGG
+
+- Tutorial : https://youtu.be/XmkQLqxSLgQ
+- Question to practice : https://leetcode.com/problems/group-sold-products-by-the-date/description/
