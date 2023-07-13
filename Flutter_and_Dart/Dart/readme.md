@@ -25,6 +25,9 @@ Table of Contents
   - [Basics of class](#basics-of-class)
   - [Misc : Immutable Classes](#misc--immutable-classes)
   - [Inheritance](#inheritance)
+    - [Extending classes](#extending-classes)
+    - [Class Modifiers](#class-modifiers)
+    - [Mixins](#mixins)
 
 # Tutorial
 
@@ -366,13 +369,13 @@ class Rectangle {
 
   // Setters
   // By using the `set` keyword, we tell dart that the sole purpose of this method is to set a value.
-  set setLength(double length) => this._length = length;
-  set setBreadth(double breadth) => this._breadth = breadth;
+  set length(double length) => this._length = length;
+  set breadth(double breadth) => this._breadth = breadth;
 
   // Getters
   // By using the `get` keyword, we tell dart that the sole purpose of this method is to get a value and thus, we don't need to use `return` keyword.
-  double get getLength => _length;
-  double get getBreadth => _breadth;
+  double get length => _length;
+  double get breadth => _breadth;
 
   /* STATIC VARIABLES and METHODS */
   static String NAME = "Raj";
@@ -388,21 +391,20 @@ void main() {
   Rectangle rect2 = Rectangle.overrided(5, 16);
 
   // Using setters
-  rect1.setLength = 15;
-  rect1.setBreadth = 25;
-  rect2.setLength = 16;
-  rect2.setBreadth = 26;
+  rect1.length = 15;
+  rect1.breadth = 25;
+  rect2.length = 16;
+  rect2.breadth = 26;
 
   // Accessing getters
-  print(
-      "rect1 length = ${rect1.getLength} \t rect2 length = ${rect2.getLength}");
-  print(
-      "rect1 length = ${rect1.getBreadth} \t rect2 length = ${rect2.getBreadth}");
+  print("rect1 length = ${rect1.length} \t rect2 length = ${rect2.length}");
+  print("rect1 length = ${rect1.breadth} \t rect2 length = ${rect2.breadth}");
 
   // Using static variables and methods
   print("Name = ${Rectangle.NAME} \t Age = ${Rectangle.AGE}");
   Rectangle.greet();
 }
+
 ```
 
 ## Misc : Immutable Classes
@@ -438,3 +440,93 @@ void main() {
 ## Inheritance
 
 https://youtu.be/Fqcsow_7go4?t=13210
+
+I will be comparing dart to java in this case
+
+- `extends` : Used for inhertiance
+- `implements` : Used for implementing classes
+- Only one class can be extended (inherited)
+- One class can implement many interfaces / classes
+- Polymorphism is supported
+- Typecasting : `(<object> as <className>)`
+
+### Extending classes
+
+```dart
+class Vehicle {
+  int _speed = 0;
+  void accelerate() => _speed += 10;
+
+  void deaccelerate() => _speed -= 10;
+
+  void applyBrake() {
+    while (_speed > 0) this.deaccelerate();
+  }
+
+  int get speed => _speed;
+  void set speed(int speed) => this._speed = speed;
+}
+
+class Car extends Vehicle {
+  int _numberOfWheels = 4;
+  double _steeringAngleDegrees = 90;
+
+  // The @override annotation is just like Java : program can compile without it but it is still recommended to use it so that the IDE can help detect any errors
+  @override
+  void accelerate() => _speed += 15;
+
+  @override
+  void deaccelerate() => _speed -= 15;
+
+  void steerRight() => _steeringAngleDegrees += 2;
+  void steerLeft() => _steeringAngleDegrees += 2;
+
+  int get numberOfWheels => _numberOfWheels;
+  double get steeringAngleDegrees => _steeringAngleDegrees;
+}
+
+void main() {
+  // Polymorphism
+  Vehicle c = Car();
+  print(c._speed);
+  c.speed = 20;
+  print(c.speed);
+
+  // Type casting
+  print((c as Car)._steeringAngleDegrees);
+  (c as Car).steerRight();
+  print((c as Car)._steeringAngleDegrees);
+}
+
+```
+
+### Class Modifiers
+
+By default, any created class has the following
+
+- Can be extended and implemented by any class
+- Can be instantiated
+- Methods must be defined and variables can be declared or defined
+  They are defined as follows
+
+- `abstract`
+  - Methods and variables can be left empty or have implmenetations.
+  - Can be extended / implemented
+  - For practical usage, it is better to `implement` an abstract class as this allows us to have multiple inheritance (one class implementing many abstract classes)
+  - Cannot be instantiated
+- `sealed`
+  - Cannot be instantiated
+  - Prevents classes to implement or extend the "sealed" class
+- `final`
+  - Prevents classes to implement or extend the "sealed" class
+  - Can be instantiated
+- `base`
+  - Cannot be implemented but extended.
+  - When an object of extended class is created, the constructor of base class is also executed
+- `interface`
+  - Can only be implemented by any class
+  - **NOT EQUIVALENT TO `interface` IN JAVA**. To acheive that functionality, use `abstract interface`
+
+### Mixins
+
+It is a "kind of class" which can be "mixed" with any class. We can "mix" more than one mixins with a class. For example, see the following code

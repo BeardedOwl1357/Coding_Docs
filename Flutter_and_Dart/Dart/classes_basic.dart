@@ -18,13 +18,13 @@ class Rectangle {
 
   // Setters
   // By using the `set` keyword, we tell dart that the sole purpose of this method is to set a value.
-  set setLength(double length) => this._length = length;
-  set setBreadth(double breadth) => this._breadth = breadth;
+  set length(double length) => this._length = length;
+  set breadth(double breadth) => this._breadth = breadth;
 
   // Getters
   // By using the `get` keyword, we tell dart that the sole purpose of this method is to get a value and thus, we don't need to use `return` keyword.
-  double get getLength => _length;
-  double get getBreadth => _breadth;
+  double get length => _length;
+  double get breadth => _breadth;
 
   /* STATIC VARIABLES and METHODS */
   static String NAME = "Raj";
@@ -40,16 +40,14 @@ void main() {
   Rectangle rect2 = Rectangle.overrided(5, 16);
 
   // Using setters
-  rect1.setLength = 15;
-  rect1.setBreadth = 25;
-  rect2.setLength = 16;
-  rect2.setBreadth = 26;
+  rect1.length = 15;
+  rect1.breadth = 25;
+  rect2.length = 16;
+  rect2.breadth = 26;
 
   // Accessing getters
-  print(
-      "rect1 length = ${rect1.getLength} \t rect2 length = ${rect2.getLength}");
-  print(
-      "rect1 length = ${rect1.getBreadth} \t rect2 length = ${rect2.getBreadth}");
+  print("rect1 length = ${rect1.length} \t rect2 length = ${rect2.length}");
+  print("rect1 length = ${rect1.breadth} \t rect2 length = ${rect2.breadth}");
 
   // Using static variables and methods
   print("Name = ${Rectangle.NAME} \t Age = ${Rectangle.AGE}");
