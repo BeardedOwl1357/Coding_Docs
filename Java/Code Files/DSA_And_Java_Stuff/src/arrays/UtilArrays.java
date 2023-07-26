@@ -208,11 +208,39 @@ public class UtilArrays {
                 .toArray();
         printArray(common_elements);
         System.out.println("====================================");
+
+        /* # Sorting 2D Arrays
+            - We can use a lambda function to define the sorting behavior
+            - Refer to the below example
+         */
+        int[][] arr_2d = {
+                {3,1},
+                {5,1},
+                {3,7},
+                {6,1},
+                {6,2},
+                {6,3}
+        };
+        // Sorting on the basis of [0] element
+        Arrays.sort(arr_2d,(ele1,ele2) -> {
+            if(ele1[0] > ele2[0]) return 1;
+            if(ele1[0] == ele2[0] && ele1[1] > ele2[1]) return 0;
+            return -1;
+        });
+        print2dArray(arr_2d);
     }
 
     public static void printArray(int[] arr){
         for(int i = 0; i < arr.length; ++i)
             System.out.printf("%d ",arr[i]);
         System.out.println();
+    }
+
+    public static void print2dArray(int[][] arr){
+        for(int[] temp : arr){
+            for(int num : temp)
+                System.out.printf("%d ",num);
+            System.out.println();
+        }
     }
 }
