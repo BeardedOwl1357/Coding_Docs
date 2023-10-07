@@ -6,6 +6,7 @@ Table of Contents
   - [Updating Via CLI](#updating-via-cli)
   - [Downloading a youtube playlist and saving each video in the same format as the playlist](#downloading-a-youtube-playlist-and-saving-each-video-in-the-same-format-as-the-playlist)
   - [Downloading Several Youtube Playlists And Organizing Them In Their Respective Folders](#downloading-several-youtube-playlists-and-organizing-them-in-their-respective-folders)
+  - [Categorizing Videos Based On Channel](#categorizing-videos-based-on-channel)
 
 # Resources- [Resources](#resources)
 
@@ -53,7 +54,18 @@ https://www.youtube.com/playlist?list=PLG4bwc5fquzjyv86kYn0ao6LOx4Emz8tH
 
 In bash (for windows, use Gitbash or WSL), the command which you need to execute is as follows
 ```bash
-while read -r LINK; do echo $LINK; yt-dlp.exe $LINK -o '/e/%(playlist_title)s/%(playlist_index)s_%(title)s.%(ext)s' -f mp4 ; done < yt-links.txt
+# Full Path of the destination where we will download the videos
+YT_DLP_OUTPUT_PATH='/e/%(playlist_title)s/%(playlist_index)s_%(title)s.%(ext)s'
+# Read each link and download
+while read -r LINK; do echo $LINK; yt-dlp.exe $LINK -o $YT_DLP_OUTPUT_PATH -f mp4 ; done < yt-links.txt
 ```
 Reference : [ubuntu 14.04 - youtube-dl | Download playlist in respective directory - Super User](https://superuser.com/questions/993993/youtube-dl-download-playlist-in-respective-directory)
 
+## Categorizing Videos Based On Channel
+Assuming that we have a file called `links.txt` which contains youtube links, the script below downloads the videos
+```bash
+# Full Path of the destination where we will download the videos
+YT_DLP_OUTPUT_PATH="/e/%(channel)s/%(title)s.%(ext)s"
+# Read each link and download
+while read -r LINK; do yt-dlp.exe $LINK -o $YT_DLP_OUTPUT_PATH -f mp4; done < links.txt
+```
